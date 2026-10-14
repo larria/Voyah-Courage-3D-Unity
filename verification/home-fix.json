@@ -1,0 +1,20 @@
+{
+  "desktop": {
+    "errors": [],
+    "idStable": true,
+    "fullscreen": true,
+    "paint": "玄英黑",
+    "interior": "深海蓝"
+  },
+  "mobile": {
+    "errors": [],
+    "idStable": true,
+    "fullscreen": true,
+    "paint": "玄英黑",
+    "interior": "深海蓝"
+  },
+  "groups": {
+    "paint": 4,
+    "interior": 3
+  }
+}

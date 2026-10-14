@@ -1,0 +1,240 @@
+{
+  "setRearview": [
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "setDaytimeRunningLight": [
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "setpositionLampLight": [
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "setRearLogoLightLight": [
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    }
+  ],
+  "setCarChargingCable": [
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    }
+  ],
+  "setCarDoorHandle": [
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    }
+  ],
+  "carLockStatus": [
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "setWheelType": [
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 2,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": [
+        "Page.evaluate: undefined"
+      ]
+    }
+  ],
+  "setVersion": [
+    {
+      "arg": 1,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 2,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "setLightBinker": [
+    {
+      "arg": null,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "carControlFindCar": [
+    {
+      "arg": null,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "carCameraperspective": [
+    {
+      "arg": 0,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 2,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 3,
+      "changed": false,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 4,
+      "changed": false,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 5,
+      "changed": false,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ],
+  "jumpState": [
+    {
+      "arg": 0,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    },
+    {
+      "arg": 1,
+      "changed": true,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 2,
+      "changed": false,
+      "baseline_equal": true,
+      "errors": []
+    },
+    {
+      "arg": 3,
+      "changed": true,
+      "baseline_equal": false,
+      "errors": []
+    }
+  ]
+}

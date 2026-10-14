@@ -1,34 +1,112 @@
 {
-  "深海蓝": {
-    "changed": true
-  },
-  "皓月白": {
-    "changed": true
-  },
-  "旭日红": {
-    "changed": true
-  },
-  "大灯开": {
-    "changed": true
-  },
-  "大灯关": {
-    "changed": true
-  },
-  "行驶开": {
-    "changed": true
-  },
-  "行驶关": {
-    "changed": true
-  },
-  "后视镜关": {
-    "changed": false
-  },
-  "后视镜开": {
-    "changed": true
-  },
-  "相机预设1": {
-    "changed": true
-  },
+  "深海蓝": [
+    {
+      "changed": true
+    }
+  ],
+  "皓月白": [
+    {
+      "changed": true
+    }
+  ],
+  "旭日红": [
+    {
+      "changed": true
+    }
+  ],
+  "大灯开": [
+    {
+      "changed": true
+    }
+  ],
+  "大灯关": [
+    {
+      "changed": true
+    }
+  ],
+  "行驶开": [
+    {
+      "changed": true
+    }
+  ],
+  "行驶关": [
+    {
+      "changed": true
+    }
+  ],
+  "后视镜关": [
+    {
+      "changed": true
+    }
+  ],
+  "后视镜开": [
+    {
+      "changed": true
+    }
+  ],
+  "轮毂1": [
+    {
+      "changed": true
+    }
+  ],
+  "轮毂0": [
+    {
+      "changed": true
+    }
+  ],
+  "尾门切换": [
+    {
+      "changed": true
+    },
+    {
+      "changed": true
+    }
+  ],
+  "日行灯关": [
+    {
+      "changed": true
+    }
+  ],
+  "日行灯开": [
+    {
+      "changed": true
+    }
+  ],
+  "位置灯关": [
+    {
+      "changed": true
+    }
+  ],
+  "位置灯开": [
+    {
+      "changed": true
+    }
+  ],
+  "锁车开": [
+    {
+      "changed": false
+    }
+  ],
+  "锁车关": [
+    {
+      "changed": true
+    }
+  ],
+  "相机预设1": [
+    {
+      "changed": true
+    }
+  ],
+  "相机预设2": [
+    {
+      "changed": true
+    }
+  ],
+  "相机预设0": [
+    {
+      "changed": true
+    }
+  ],
   "invalid": "INVALID_ARGUMENT",
   "second": "INSTANCE_ACTIVE",
   "after_destroy": "DESTROYED",

@@ -25,8 +25,13 @@ await player.setHeadlights(true);
 - `setInterior(code)`：R旭日红、P深海蓝、Q皓月白。变更真实内饰材质，不强制切换内饰相机。
 - `setHeadlights(boolean)`：原始API.setFrontLight，开关画面变化实测。
 - `setDriving(boolean)`：API.carDrivingStatus，启动/停止画面变化实测；并非真实车辆控制。
-- `setMirrors(boolean)`：API.setRearview，1有画面变化，但镜子开/闭方向还需专项核验，不适合依赖其物理语义的业务。
-- `setCameraPreset(1)`：已观察原始相机变化；其他编号仅允许实验调用。
+- `setMirrors(expanded)`：true展开、false折叠；原始值0展开/1折叠，组件已转换。此方法还会影响灯光，非纯镜控制，标为preview。
+- `setDaytimeRunningLights(on)`、`setPositionLights(on)`：已实际观察开关画面变化，preview。
+- `setLocked(locked)`：true锁车/false解锁，原版会联动灯光、镜子，尚未完整检查所有副作用，preview。
+- `setWheelType(index)`：仅支持0/1，两种轮毂已验证切换及恢复。原版index=2触发异常，组件拒绝。
+- `toggleTrunk()`：原始根对象/ZY无参方法，实际验证打开和关闭；不提供幂等状态设置。
+- `flashTurnSignals()`、`findCar()`：原始无参方法，已观察画面变化但闪烁次数和完整动画尚未验收，preview。
+- `setCameraPreset(index)`：支持0/1/2，已观察相机切换；不宣称预设具体名称，3以上无有效变化。
 - `getCapabilities()`：候选、已观察画面变化、未支持清单；verified不代表所有动画时序和副作用均已验收。
 - `getState()`：lifecycle + requested + observed:null。requested仅为命令请求，不冒充Unity真实回读。
 - `destroy(): Promise<void>`：幂等，Quit并释放canvas和实例锁。加载中销毁要等待后台加载结束，不保证立即完成。
@@ -41,9 +46,11 @@ await player.setHeadlights(true);
 覆盖轮毂、版本、选装、灯组、转向闪烁、锁车、寻车、充电线、门把手、座椅、场景和相机等原始API候选。不能宣称全部候选已生效。没有任意对象SendMessage逃生通道，避免把字段误当函数。
 
 ## 门窗尾门限制
-`setDoor/setWindow/setTrunk` 当前明确拒绝UNSUPPORTED。元数据中内部方法存在，但在ZY对象SendMessage调用无可观察动作。DoorID真实枚举LF=1、LB=2、RF=4、RB=8；triggerDoorWindow*和triggerTrunk是内部热点字段，不是方法。原始鼠标热点仍保留，不能用屏幕坐标模拟点击冒充完整API。
+尾门已打通`toggleTrunk()`：场景同时有根`/ZY`和`/ZY/ZY-new/ZY`同名网格，裸ZY命中错误对象；绝对路径解决。`setTrunk`仍拒绝，因为无真实回读不能可靠实现幂等。
 
-本版不是全部功能完成：门窗尾门可靠JS入口、门速/轮转角、多相机预设、候选方法值域及真实状态回读仍需继续分析。
+`setDoor/setWindow`仍拒绝UNSUPPORTED。正确/ZY目标下toggleDoor/Window的DoorID枚举经Unity _SendMessageFloat产生托管异常，不是数值猜错。LF=1、LB=2、RF=4、RB=8。多参数setDoors/setDoorWindows无法经单参SendMessage派发，热点onTrigger是委托字段。原始wasm无导出IL2CPP反射调用API，函数表缺实例指针/MethodInfo映射，未进行不可靠内存或二进制改写。
+
+本版仍不是全部功能完成：四门四窗JS入口、门速/轮转角、完整配置值域及真实状态回读未解决。充电线、门把手、后Logo灯在当前前视角无变化，不能宣称生效。setVersion=2有变化但语义未确认，继续留实验接口。
 
 ## 验证
-独立测试页 `/examples/api.html`；运行证据 `verification/component-check.json`、`component-*.png`、`api-probe.json`。每步截取viewer画面，而非仅看按钮文字。内饰三色、大灯往返、行驶往返、销毁重挂载、非法参数、重复实例均实际驱动。镜子0无变化、1有变化，未确定语义；候选接口未完整验证。
+独立测试页 `/examples/api.html`；运行证据 `verification/component-check.json`、`component-*.png`、`api-probe.json`。每步截取viewer画面，而非仅看按钮文字。内饰三色、大灯往返、行驶往返、销毁重挂载、非法参数、重复实例均实际驱动。新一轮测试验证轮毂0/1、尾门两次切换、日行灯和位置灯往返、后视镜两方向及相机0/1/2。详细原始探测在verification/extended-api/results.json，尾门接收对象证据在verification/scene-bindings.json和scene-api-check.log；候选接口未完整验证。

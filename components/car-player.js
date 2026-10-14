@@ -1,3 +1,4 @@
+import { createRuntimeControls } from './runtime-controls.js';
 const active = { player: null };
 const loaders = new Map();
 export const PAINTS = Object.freeze({ QGJ: '香槟金', XYH: '玄英黑', JSH: '宸星灰', NUB: '杜若白' });
@@ -95,8 +96,8 @@ export class CarPlayer extends EventTarget {
   getState() { return { lifecycle: this._phase, requested: structuredClone(this._requested), observed: null }; }
   getCapabilities() {
     return {
-      verified: ['setPaint','setInterior','setHeadlights','setDriving'],
-      preview: ['setMirrors','setCameraPreset'],
+      verified: ['setPaint','setInterior','setHeadlights','setDriving','setWheelType','toggleTrunk'],
+      preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
       unavailable: ['setDoor','setWindow','setTrunk','setDoorSpeed','setWheelAngle'],
       stateReadback: false, multipleInstances: false,
@@ -124,14 +125,33 @@ export class CarPlayer extends EventTarget {
   }
   setHeadlights(on) { return this._boolean('setFrontLight', on, 'headlights'); }
   setDriving(on) { return this._boolean('carDrivingStatus', on, 'driving'); }
-  setMirrors(expanded) { return this._boolean('setRearview', expanded, 'mirrors'); }
+  // Original setRearview uses 1 for folded, 0 for expanded and also changes lighting.
+  setMirrors(expanded) {
+    if (typeof expanded !== 'boolean') return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', '状态必须为 boolean'));
+    return this._send('setRearview', expanded ? 0 : 1, 'mirrorsFolded');
+  }
+  setDaytimeRunningLights(on) { return this._boolean('setDaytimeRunningLight', on, 'daytimeRunningLights'); }
+  setPositionLights(on) { return this._boolean('setpositionLampLight', on, 'positionLights'); }
+  setLocked(locked) { return this._boolean('carLockStatus', locked, 'locked'); }
+  flashTurnSignals() { return this._send('setLightBinker'); }
+  findCar() { return this._send('carControlFindCar'); }
+  setWheelType(index) {
+    if (!Number.isInteger(index) || index < 0 || index > 1) return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', '轮毂 index 仅支持已验证的 0 或 1'));
+    return this._send('setWheelType', index, 'wheelType');
+  }
   setCameraPreset(index) {
-    if (!Number.isInteger(index) || index !== 1) return Promise.reject(new CarPlayerError('UNSUPPORTED', '目前仅验证相机 preset=1，其余请使用实验接口'));
+    if (!Number.isInteger(index) || index < 0 || index > 2) return Promise.reject(new CarPlayerError('UNSUPPORTED', '目前仅支持已探测相机 preset=0/1/2，其余请使用实验接口'));
     return this._send('carCameraperspective', index, 'camera');
   }
   setDoor() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '原版没有已验证的 JS 门状态入口，保留模型点击交互')); }
   setWindow() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '原版没有已验证的 JS 车窗状态入口')); }
-  setTrunk() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '原版没有已验证的 JS 尾门状态入口')); }
+  async toggleTrunk() {
+    this._assertAlive(); await this._ready; this._assertAlive();
+    createRuntimeControls(this._instance).toggleTrunk();
+    const result = { id: ++this._sequence, target: '/ZY', method: 'toggleTrunk', status: 'dispatched', observed: false };
+    this._emit('command', result); return result;
+  }
+  setTrunk() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '尾门已支持 toggleTrunk；无真实回读，不能提供幂等 setTrunk')); }
   _invokeExperimental(method, value) {
     const signature = RUNTIME_METHODS[method];
     if (!signature) return Promise.reject(new CarPlayerError('UNSUPPORTED', '不是元数据确认的 API 方法'));

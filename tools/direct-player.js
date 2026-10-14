@@ -2,7 +2,7 @@ import { CarPlayer, PAINTS, INTERIORS } from '../components/car-player.js';
 const status = document.getElementById('status');
 const player = new CarPlayer(document.getElementById('stage'));
 window.car = player;
-player.canvas.id = 'unity-canvas';
+player.canvas.classList.add('car-canvas');
 player.addEventListener('progress', event => { status.textContent = `加载模型 ${Math.round(event.detail.progress * 100)}%`; });
 player.addEventListener('error', event => { status.textContent = `加载失败：${event.detail.message}`; });
 player.addEventListener('ready', () => {

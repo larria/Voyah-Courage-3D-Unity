@@ -1,15 +1,20 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>知音组件 API 测试页</title><style>body{margin:0;font:14px system-ui;background:#f6f7f8;color:#222}#viewer{height:65vh;min-height:420px;background:#fff}.controls{padding:20px;max-width:1100px;margin:auto}button,select,input{margin:4px;padding:8px}pre{white-space:pre-wrap;background:#fff;padding:16px;max-height:260px;overflow:auto}.notice{color:#666}</style><div id="viewer"></div><main class="controls"><h1>知音 JS 组件 · API 测试</h1><p class="notice">命令结果 dispatched 仅代表派发，不代表动画完成或车辆状态回读。实验接口的数值含义须自行核验。</p><div id="buttons"></div><button id="destroy">销毁</button><button id="mount">重新挂载</button><button id="state">读取能力与请求状态</button><h2>实验运行时接口</h2><select id="method"></select><input id="value" value="0" aria-label="参数"><button id="send">派发实验命令</button><h2>尚未打通的能力</h2><p>四门、四窗、尾门、门速、轮转角：原始内部方法存在，但没有已验证的 JS 状态设置入口。保留模型自身点击交互，不以伪API冒充。</p><pre id="log"></pre></main><script type="module">
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>知音组件 API 测试页</title><style>body{margin:0;font:14px system-ui;background:#f6f7f8;color:#222}#viewer{height:65vh;min-height:420px;background:#fff}.controls{padding:20px;max-width:1100px;margin:auto}button,select,input{margin:4px;padding:8px}pre{white-space:pre-wrap;background:#fff;padding:16px;max-height:260px;overflow:auto}.notice{color:#666}</style><div id="viewer"></div><main class="controls"><h1>知音 JS 组件 · API 测试</h1><p class="notice">命令结果 dispatched 仅代表派发，不代表动画完成或车辆状态回读。实验接口的数值含义须自行核验。</p><section aria-labelledby="paint-heading"><h2 id="paint-heading">外观颜色</h2><div id="paint-buttons"></div></section><section aria-labelledby="interior-heading"><h2 id="interior-heading">内饰颜色</h2><div id="interior-buttons"></div></section><section aria-labelledby="actions-heading"><h2 id="actions-heading">车辆操作</h2><div id="buttons"></div></section><button id="destroy">销毁</button><button id="mount">重新挂载</button><button id="state">读取能力与请求状态</button><h2>实验运行时接口</h2><select id="method"></select><input id="value" value="0" aria-label="参数"><button id="send">派发实验命令</button><h2>尚未打通的能力</h2><p>四门、四窗、门速、轮转角：原始内部方法存在，但门窗枚举参数不兼容原始 JS 消息桥。尾门已支持真实 toggle API，尚无幂等状态设定。保留模型自身点击交互，不以伪API冒充。</p><pre id="log"></pre></main><script type="module">
 import { CarPlayer, PAINTS, INTERIORS, RUNTIME_METHODS } from '../components/car-player.js';
 let player;
 const log=document.querySelector('#log');
 function write(value){log.textContent=JSON.stringify(value,null,2)+'\n'+log.textContent;}
 function mount(){try{player=new CarPlayer(document.querySelector('#viewer'));window.player=player;for(const event of ['progress','ready','command','error','destroyed'])player.addEventListener(event,e=>write({event,detail:e.detail}));player.ready().catch(e=>write({code:e.code,error:e.message}));}catch(e){write({code:e.code,error:e.message});}}
 const buttons=document.querySelector('#buttons');
-function button(label,method,value){const b=document.createElement('button');b.textContent=label;b.addEventListener('click',async()=>{try{write(await player[method](value));}catch(e){write({code:e.code,error:e.message});}});buttons.append(b);}
-for(const [code,label] of Object.entries(PAINTS))button(label,'setPaint',code);
-for(const [code,label] of Object.entries(INTERIORS))button(label,'setInterior',code);
+function button(label,method,value,group=buttons){const b=document.createElement('button');b.textContent=label;b.addEventListener('click',async()=>{try{write(await player[method](value));}catch(e){write({code:e.code,error:e.message});}});group.append(b);}
+for(const [code,label] of Object.entries(PAINTS))button(label,'setPaint',code,document.querySelector('#paint-buttons'));
+for(const [code,label] of Object.entries(INTERIORS))button(label,'setInterior',code,document.querySelector('#interior-buttons'));
 for(const [name,method] of [['大灯','setHeadlights'],['行驶','setDriving'],['后视镜','setMirrors']]){button(name+'开',''+method,true);button(name+'关',''+method,false);}
-button('相机预设1','setCameraPreset',1);
+for (const i of [0,1,2]) button('相机预设'+i,'setCameraPreset',i);
+for (const i of [0,1]) button('轮毂'+i,'setWheelType',i);
+button('尾门切换','toggleTrunk');
+button('转向灯闪烁','flashTurnSignals');
+button('寻车','findCar');
+for (const [name,method] of [['日行灯','setDaytimeRunningLights'],['位置灯','setPositionLights'],['锁车','setLocked']]) { button(name+'开',method,true); button(name+'关',method,false); }
 document.querySelector('#destroy').onclick=async()=>{try{await player.destroy();write('已销毁');}catch(e){write(e.message);}};
 document.querySelector('#mount').onclick=mount;
 document.querySelector('#state').onclick=()=>write({capabilities:player.getCapabilities(),state:player.getState()});

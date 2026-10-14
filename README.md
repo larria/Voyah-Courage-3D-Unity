@@ -25,7 +25,7 @@ await window.car.setDriving(true);
 window.car.getCapabilities();
 ```
 
-独立 ES module 组件位于 `components/car-player.js`，规范接口与限制见 `components/API.md`；独立测试页 http://127.0.0.1:18743/examples/api.html 。已补三种真实内饰材质切换，并实测大灯和行驶开关、销毁与重挂载。门窗尾门可靠API尚未打通；32个原始API方法的实验通道可用于继续验证，不等于全部功能通过。
+独立 ES module 组件位于 `components/car-player.js`，规范接口与限制见 `components/API.md`；独立测试页 http://127.0.0.1:18743/examples/api.html 。已补三种真实内饰材质切换，并实测大灯和行驶开关、销毁与重挂载。尾门已支持真实`toggleTrunk()`，轮毂0/1已验证，新增日行灯、位置灯、锁车、后视镜、转向闪烁、寻车和相机0/1/2接口（其中preview能力有副作用或未完整验收）。四门四窗可靠API仍未打通：/ZY正确目标已确认，但DoorID枚举不兼容原始SendMessage桥；32个原始API方法的实验通道不等于全部功能通过。
 
 `verification/direct-check.json`：桌面1280×900画布展示高684px，手机390×844展示高574px；按钮换色、全屏及无效颜色保护通过。同609×300视口、DPR=2且排除界面覆盖层时，直出模型截图与官网参考逐像素相同。改变展示区尺寸后构图自然变化，不等于整页截图与官网一致。
 

@@ -1,0 +1,1124 @@
+{
+  "Configurator.API": {
+    "methods": [
+      {
+        "name": "returncarDrivingOutDone",
+        "parameters": [],
+        "token": "0x6000011"
+      },
+      {
+        "name": "getcarDrivingOutDone",
+        "parameters": [],
+        "token": "0x6000012"
+      },
+      {
+        "name": "setCarPaint",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000013"
+      },
+      {
+        "name": "setInteriorMaterial",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000014"
+      },
+      {
+        "name": "setWheelType",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000015"
+      },
+      {
+        "name": "setVersion",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000016"
+      },
+      {
+        "name": "setRearview",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000017"
+      },
+      {
+        "name": "setRearview",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000018"
+      },
+      {
+        "name": "setFrontLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000019"
+      },
+      {
+        "name": "setDaytimeRunningLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600001a"
+      },
+      {
+        "name": "setpositionLampLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600001b"
+      },
+      {
+        "name": "setRearLogoLightLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600001c"
+      },
+      {
+        "name": "setLightBinker",
+        "parameters": [],
+        "token": "0x600001d"
+      },
+      {
+        "name": "setCarChargingCable",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600001e"
+      },
+      {
+        "name": "setCarChargingCable",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x600001f"
+      },
+      {
+        "name": "setCarDoorHandle",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000020"
+      },
+      {
+        "name": "setCarDoorHandle",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000021"
+      },
+      {
+        "name": "setCarseat",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000022"
+      },
+      {
+        "name": "setCarseat",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000023"
+      },
+      {
+        "name": "jumpState",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000024"
+      },
+      {
+        "name": "carCameraperspective",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000025"
+      },
+      {
+        "name": "featureCodesUrl",
+        "parameters": [
+          {
+            "name": "str",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000026"
+      },
+      {
+        "name": "carLockStatus",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000027"
+      },
+      {
+        "name": "carControlFindCar",
+        "parameters": [],
+        "token": "0x6000028"
+      },
+      {
+        "name": "carlightStatus",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x6000029"
+      },
+      {
+        "name": "carSetDaytimeRunningLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600002a"
+      },
+      {
+        "name": "carsetpositionLampLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600002b"
+      },
+      {
+        "name": "carsetRearLogoLightLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600002c"
+      },
+      {
+        "name": "carDrivingStatus",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Int32"
+          }
+        ],
+        "token": "0x600002d"
+      },
+      {
+        "name": "versionTab",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x600002e"
+      },
+      {
+        "name": "exteriorTab",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x600002f"
+      },
+      {
+        "name": "hubTab",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000030"
+      },
+      {
+        "name": "interiorTab",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000031"
+      },
+      {
+        "name": "version",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000032"
+      },
+      {
+        "name": "package",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000033"
+      },
+      {
+        "name": "exterior",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000034"
+      },
+      {
+        "name": "hub",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000035"
+      },
+      {
+        "name": "interior",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000036"
+      },
+      {
+        "name": "carStatusScene",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.String"
+          }
+        ],
+        "token": "0x6000037"
+      },
+      {
+        "name": ".ctor",
+        "parameters": [],
+        "token": "0x6000038"
+      }
+    ],
+    "fields": [
+      {
+        "name": "main",
+        "typeIndex": 6182
+      },
+      {
+        "name": "_lastcarLockStatusMessage",
+        "typeIndex": 5899
+      },
+      {
+        "name": "_lastcarDrivingStatusMessage",
+        "typeIndex": 5899
+      },
+      {
+        "name": "LsVersionMap",
+        "typeIndex": 1155
+      },
+      {
+        "name": "LsOptional",
+        "typeIndex": 1155
+      },
+      {
+        "name": "LsCarPaint",
+        "typeIndex": 1155
+      },
+      {
+        "name": "LsInterior",
+        "typeIndex": 1155
+      },
+      {
+        "name": "Lshub",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZGVersionMap",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZGOptional",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZGCarPaint",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZGInterior",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZGhub",
+        "typeIndex": 1155
+      },
+      {
+        "name": "TSVersionMap",
+        "typeIndex": 1155
+      },
+      {
+        "name": "TSOptional",
+        "typeIndex": 1155
+      },
+      {
+        "name": "TSCarPaint",
+        "typeIndex": 1155
+      },
+      {
+        "name": "TSInterior",
+        "typeIndex": 1155
+      },
+      {
+        "name": "TShub",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZYVersionMap",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZYOptional",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZYCarPaint",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZYInterior",
+        "typeIndex": 1155
+      },
+      {
+        "name": "ZYhub",
+        "typeIndex": 1155
+      }
+    ]
+  },
+  "Configurator.CarConfigurator": {
+    "methods": [
+      {
+        "name": "Start",
+        "parameters": [],
+        "token": "0x6000039"
+      },
+      {
+        "name": "OnDestroy",
+        "parameters": [],
+        "token": "0x600003a"
+      },
+      {
+        "name": "Awake",
+        "parameters": [],
+        "token": "0x600003b"
+      },
+      {
+        "name": "resetPose",
+        "parameters": [],
+        "token": "0x600003c"
+      },
+      {
+        "name": "setupCarPaint",
+        "parameters": [],
+        "token": "0x600003d"
+      },
+      {
+        "name": "setCarPaint",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "System.Int32"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x600003e"
+      },
+      {
+        "name": "setupDoor",
+        "parameters": [],
+        "token": "0x600003f"
+      },
+      {
+        "name": "setDoors",
+        "parameters": [
+          {
+            "name": "doorState",
+            "type": "System.Int32"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000040"
+      },
+      {
+        "name": "toggleDoor",
+        "parameters": [
+          {
+            "name": "doorID",
+            "type": "Common.Car.DoorID"
+          }
+        ],
+        "token": "0x6000041"
+      },
+      {
+        "name": "setDoor",
+        "parameters": [
+          {
+            "name": "doorID",
+            "type": "Common.Car.DoorID"
+          },
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000042"
+      },
+      {
+        "name": "setDoorSpeed",
+        "parameters": [
+          {
+            "name": "doorID",
+            "type": "Common.Car.DoorID"
+          },
+          {
+            "name": "speed",
+            "type": "System.Single"
+          }
+        ],
+        "token": "0x6000043"
+      },
+      {
+        "name": "setupDoorWindow",
+        "parameters": [],
+        "token": "0x6000044"
+      },
+      {
+        "name": "setDoorWindows",
+        "parameters": [
+          {
+            "name": "doorState",
+            "type": "System.Int32"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000045"
+      },
+      {
+        "name": "toggleDoorWindow",
+        "parameters": [
+          {
+            "name": "doorID",
+            "type": "Common.Car.DoorID"
+          }
+        ],
+        "token": "0x6000046"
+      },
+      {
+        "name": "setDoorWindow",
+        "parameters": [
+          {
+            "name": "doorID",
+            "type": "Common.Car.DoorID"
+          },
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000047"
+      },
+      {
+        "name": "setupTrunk",
+        "parameters": [],
+        "token": "0x6000048"
+      },
+      {
+        "name": "setTrunk",
+        "parameters": [
+          {
+            "name": "value",
+            "type": "System.Boolean"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000049"
+      },
+      {
+        "name": "toggleTrunk",
+        "parameters": [],
+        "token": "0x600004a"
+      },
+      {
+        "name": "setupWheel",
+        "parameters": [],
+        "token": "0x600004b"
+      },
+      {
+        "name": "setWheelRoll",
+        "parameters": [
+          {
+            "name": "angle",
+            "type": "System.Single"
+          }
+        ],
+        "token": "0x600004c"
+      },
+      {
+        "name": "setWheelRoll",
+        "parameters": [
+          {
+            "name": "wheelRoot",
+            "type": "UnityEngine.Transform"
+          },
+          {
+            "name": "angle",
+            "type": "System.Single"
+          },
+          {
+            "name": "bo",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x600004d"
+      },
+      {
+        "name": "setWheelRot",
+        "parameters": [
+          {
+            "name": "angle",
+            "type": "System.Single"
+          }
+        ],
+        "token": "0x600004e"
+      },
+      {
+        "name": "setWheelType",
+        "parameters": [
+          {
+            "name": "index",
+            "type": "System.Int32"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x600004f"
+      },
+      {
+        "name": "setupCarLight",
+        "parameters": [],
+        "token": "0x6000050"
+      },
+      {
+        "name": "setLightBinker",
+        "parameters": [],
+        "token": "0x6000051"
+      },
+      {
+        "name": "setupRearview",
+        "parameters": [],
+        "token": "0x6000052"
+      },
+      {
+        "name": "setRearview",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          },
+          {
+            "name": "isAnim",
+            "type": "UnresolvedTypeIndex:4431"
+          }
+        ],
+        "token": "0x6000053"
+      },
+      {
+        "name": "InitLight",
+        "parameters": [],
+        "token": "0x6000054"
+      },
+      {
+        "name": "setupCarrebound",
+        "parameters": [],
+        "token": "0x6000055"
+      },
+      {
+        "name": "setCarrebound",
+        "parameters": [],
+        "token": "0x6000056"
+      },
+      {
+        "name": "setFrontLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000057"
+      },
+      {
+        "name": "setDaytimeRunningLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000058"
+      },
+      {
+        "name": "setpositionLampLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x6000059"
+      },
+      {
+        "name": "setRearLogoLightLight",
+        "parameters": [
+          {
+            "name": "v",
+            "type": "System.Boolean"
+          }
+        ],
+        "token": "0x600005a"
+      },
+      {
+        "name": "setRearLogoLightLightClose",
+        "parameters": [],
+        "token": "0x600005b"
+      },
+      {
+        "name": ".ctor",
+        "parameters": [],
+        "token": "0x600005c"
+      },
+      {
+        "name": "<Start>b__25_0",
+        "parameters": [],
+        "token": "0x600005d"
+      },
+      {
+        "name": "<Start>b__25_1",
+        "parameters": [],
+        "token": "0x600005e"
+      },
+      {
+        "name": "<Start>b__25_2",
+        "parameters": [],
+        "token": "0x600005f"
+      },
+      {
+        "name": "<Start>b__25_3",
+        "parameters": [],
+        "token": "0x6000060"
+      },
+      {
+        "name": "<Start>b__25_4",
+        "parameters": [],
+        "token": "0x6000061"
+      },
+      {
+        "name": "<Start>b__25_5",
+        "parameters": [],
+        "token": "0x6000062"
+      },
+      {
+        "name": "<Start>b__25_6",
+        "parameters": [],
+        "token": "0x6000063"
+      },
+      {
+        "name": "<Start>b__25_7",
+        "parameters": [],
+        "token": "0x6000064"
+      },
+      {
+        "name": "<Start>b__25_8",
+        "parameters": [],
+        "token": "0x6000065"
+      },
+      {
+        "name": "<setupCarPaint>b__49_0",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "UnresolvedTypeIndex:3910"
+          }
+        ],
+        "token": "0x6000066"
+      },
+      {
+        "name": "<setupWheel>b__67_0",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "UnresolvedTypeIndex:3910"
+          }
+        ],
+        "token": "0x6000067"
+      },
+      {
+        "name": "<setupWheel>b__67_1",
+        "parameters": [],
+        "token": "0x6000068"
+      },
+      {
+        "name": "<setupCarLight>b__72_0",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "UnresolvedTypeIndex:3910"
+          }
+        ],
+        "token": "0x6000069"
+      },
+      {
+        "name": "<setupCarLight>b__72_1",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "UnresolvedTypeIndex:3910"
+          }
+        ],
+        "token": "0x600006a"
+      },
+      {
+        "name": "<setupCarLight>b__72_2",
+        "parameters": [
+          {
+            "name": "values",
+            "type": "UnresolvedTypeIndex:3910"
+          }
+        ],
+        "token": "0x600006b"
+      }
+    ],
+    "fields": [
+      {
+        "name": "durationTrunk",
+        "typeIndex": 7356
+      },
+      {
+        "name": "offsetX",
+        "typeIndex": 7346
+      },
+      {
+        "name": "triggerDoorLF",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorLB",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorRF",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorRB",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorWindowLF",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorWindowLB",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorWindowRF",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerDoorWindowRB",
+        "typeIndex": 4097
+      },
+      {
+        "name": "triggerTrunk",
+        "typeIndex": 4097
+      },
+      {
+        "name": "FrontTrunkPullRod",
+        "typeIndex": 3774
+      },
+      {
+        "name": "turnSignal",
+        "typeIndex": 6224
+      },
+      {
+        "name": "positionLamp",
+        "typeIndex": 6224
+      },
+      {
+        "name": "RearLogoLight",
+        "typeIndex": 6224
+      },
+      {
+        "name": "headlight",
+        "typeIndex": 6224
+      },
+      {
+        "name": "DaytimeRunningLight",
+        "typeIndex": 6224
+      },
+      {
+        "name": "frontturnsignal",
+        "typeIndex": 6224
+      },
+      {
+        "name": "RearpositionLamp",
+        "typeIndex": 6224
+      },
+      {
+        "name": "positionLampturnsignal",
+        "typeIndex": 6224
+      },
+      {
+        "name": "matHighLightCaliperInv",
+        "typeIndex": 6221
+      },
+      {
+        "name": "matHighLightMoonInv",
+        "typeIndex": 6221
+      },
+      {
+        "name": "onTriggerWheel",
+        "typeIndex": 4103
+      },
+      {
+        "name": "onTriggerTopView",
+        "typeIndex": 4103
+      },
+      {
+        "name": "isTriggerPose",
+        "typeIndex": 4428
+      },
+      {
+        "name": "animCarPaint",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animLightMain",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animLightBinker",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animUnlockOpen",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animUnlockClose",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animWheel",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animRearview",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animCarrebound",
+        "typeIndex": 4140
+      },
+      {
+        "name": "animDoors",
+        "typeIndex": 1101
+      },
+      {
+        "name": "animDoorWindows",
+        "typeIndex": 1101
+      },
+      {
+        "name": "animDoorKnobValues",
+        "typeIndex": 1102
+      },
+      {
+        "name": "isDoorKnobValueDirty",
+        "typeIndex": 4411
+      },
+      {
+        "name": "highlightCapilers",
+        "typeIndex": 2320
+      },
+      {
+        "name": "highlightMoons",
+        "typeIndex": 2320
+      },
+      {
+        "name": "intensityHighlightCapiler",
+        "typeIndex": 7342
+      },
+      {
+        "name": "intensityHighlightMoon",
+        "typeIndex": 7342
+      },
+      {
+        "name": "matCarPaintStart",
+        "typeIndex": 6221
+      },
+      {
+        "name": "matCarPaintEnd",
+        "typeIndex": 6221
+      },
+      {
+        "name": "matCarRoofStart",
+        "typeIndex": 6221
+      },
+      {
+        "name": "matCarRoofEnd",
+        "typeIndex": 6221
+      },
+      {
+        "name": "IssetTrunk",
+        "typeIndex": 4411
+      },
+      {
+        "name": "animTrunk",
+        "typeIndex": 4149
+      },
+      {
+        "name": "wheelRootCur",
+        "typeIndex": 7843
+      },
+      {
+        "name": "wheelRootTarget",
+        "typeIndex": 7843
+      }
+    ]
+  },
+  "Common.Car.DoorID": {
+    "methods": [],
+    "fields": [
+      {
+        "name": "value__",
+        "typeIndex": 5919
+      },
+      {
+        "name": "LF",
+        "typeIndex": 5149
+      },
+      {
+        "name": "LB",
+        "typeIndex": 5149
+      },
+      {
+        "name": "RF",
+        "typeIndex": 5149
+      },
+      {
+        "name": "RB",
+        "typeIndex": 5149
+      }
+    ]
+  }
+}

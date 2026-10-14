@@ -8,13 +8,12 @@
 </style>
 </head>
 <body>
-<div class="stage" id="stage"><canvas id="unity-canvas" tabindex="0" aria-label="全新岚图知音外观三维模型"></canvas><button class="expand" title="全屏" id="expand">⤢</button></div>
+<div class="stage" id="stage"><button class="expand" title="全屏" id="expand">⤢</button></div>
 <div class="panel"><h1>全新岚图知音</h1><div>外观颜色 · <span id="color-name">香槟金</span></div><div class="colors">
 <button disabled class="color selected" data-code="QGJ" data-name="香槟金" style="background:#bcb29b" title="香槟金"></button>
 <button disabled class="color" data-code="XYH" data-name="玄英黑" style="background:#202123" title="玄英黑"></button>
 <button disabled class="color" data-code="JSH" data-name="宸星灰" style="background:#747778" title="宸星灰"></button>
 <button disabled class="color" data-code="NUB" data-name="杜若白" style="background:#eee" title="杜若白"></button>
-</div><div class="status" id="status">正在加载官网原始模型…</div><p class="hint">拖动旋转，滚轮或双指缩放。直接点击车辆可交互部位操作门、窗和尾门；点击与动画由原始 Unity 程序处理。</p></div>
-<script src="unity-player/Build/ZY.loader.js"></script>
-<script src="tools/direct-player.js"></script>
+</div><div>内饰颜色 · <span id="interior-name">旭日红</span></div><div class="colors"><button disabled class="color selected" data-interior="R" style="background:#9b4f45" title="旭日红"></button><button disabled class="color" data-interior="P" style="background:#27384c" title="深海蓝"></button><button disabled class="color" data-interior="Q" style="background:#eee8dd" title="皓月白"></button></div><div class="status" id="status">正在加载官网原始模型…</div><p class="hint">拖动旋转，滚轮或双指缩放。直接点击车辆可交互部位操作门、窗和尾门；点击与动画由原始 Unity 程序处理。</p></div>
+<script type="module" src="tools/direct-player.js"></script>
 </body></html>

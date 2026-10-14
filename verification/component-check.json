@@ -1,0 +1,37 @@
+{
+  "深海蓝": {
+    "changed": true
+  },
+  "皓月白": {
+    "changed": true
+  },
+  "旭日红": {
+    "changed": true
+  },
+  "大灯开": {
+    "changed": true
+  },
+  "大灯关": {
+    "changed": true
+  },
+  "行驶开": {
+    "changed": true
+  },
+  "行驶关": {
+    "changed": true
+  },
+  "后视镜关": {
+    "changed": false
+  },
+  "后视镜开": {
+    "changed": true
+  },
+  "相机预设1": {
+    "changed": true
+  },
+  "invalid": "INVALID_ARGUMENT",
+  "second": "INSTANCE_ACTIVE",
+  "after_destroy": "DESTROYED",
+  "remount": true,
+  "home": "深海蓝"
+}

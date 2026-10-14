@@ -19,17 +19,20 @@ python tools/serve.py
 ```js
 await window.car.ready();
 await window.car.setPaint('XYH'); // QGJ / XYH / JSH / NUB
-window.car.capabilities; // ['setPaint']
+await window.car.setInterior('P'); // 深海蓝：R旭日红 / P深海蓝 / Q皓月白
+await window.car.setHeadlights(true);
+await window.car.setDriving(true);
+window.car.getCapabilities();
 ```
 
-加载失败会拒绝 ready()，无效颜色会报错。门窗、灯光、行驶接口尚未暴露，留待下一版逐项验证。
+独立 ES module 组件位于 `components/car-player.js`，规范接口与限制见 `components/API.md`；独立测试页 http://127.0.0.1:18743/examples/api.html 。已补三种真实内饰材质切换，并实测大灯和行驶开关、销毁与重挂载。门窗尾门可靠API尚未打通；32个原始API方法的实验通道可用于继续验证，不等于全部功能通过。
 
 `verification/direct-check.json`：桌面1280×900画布展示高684px，手机390×844展示高574px；按钮换色、全屏及无效颜色保护通过。同609×300视口、DPR=2且排除界面覆盖层时，直出模型截图与官网参考逐像素相同。改变展示区尺寸后构图自然变化，不等于整页截图与官网一致。
 
 ## 实现范围
 
 - 原始 Unity WebGL 模型、Shader、贴图、光照、动画与射线热点完整保留，没有用 Three.js 重建。
-- 提供外观展示、四种官网车漆和全屏；不提供内饰 tab 或内饰控制。
+- 提供外观展示、四种官网车漆、三种官网内饰配色和全屏。内饰配色会改变真实模型材质；不自动切换内饰相机。
 - Unity 共用包内部含透过玻璃可见的内饰几何，不能删除而不改变外观画面。
 - 参考目录只读，所有实现文件及验证资源位于本目录。
 

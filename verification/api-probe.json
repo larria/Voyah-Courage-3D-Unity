@@ -1,0 +1,102 @@
+[
+  {
+    "target": "API",
+    "method": "interior",
+    "arg": "P",
+    "changed": true,
+    "errors": [
+      "P\n",
+      "2\n"
+    ]
+  },
+  {
+    "target": "API",
+    "method": "interior",
+    "arg": "Q",
+    "changed": true,
+    "errors": [
+      "Q\n",
+      "1\n"
+    ]
+  },
+  {
+    "target": "API",
+    "method": "interior",
+    "arg": "R",
+    "changed": false,
+    "errors": [
+      "R\n",
+      "0\n"
+    ]
+  },
+  {
+    "target": "API",
+    "method": "setFrontLight",
+    "arg": 1,
+    "changed": true,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "setFrontLight",
+    "arg": 0,
+    "changed": false,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "carDrivingStatus",
+    "arg": 1,
+    "changed": true,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "setRearview",
+    "arg": 1,
+    "changed": true,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "setCarDoorHandle",
+    "arg": 1,
+    "changed": false,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "carLockStatus",
+    "arg": 1,
+    "changed": false,
+    "errors": []
+  },
+  {
+    "target": "API",
+    "method": "carCameraperspective",
+    "arg": 1,
+    "changed": true,
+    "errors": []
+  },
+  {
+    "target": "ZY",
+    "method": "toggleDoorWindow",
+    "arg": 1,
+    "changed": false,
+    "errors": []
+  },
+  {
+    "target": "ZY",
+    "method": "toggleDoorWindow",
+    "arg": 2,
+    "changed": false,
+    "errors": []
+  },
+  {
+    "target": "ZY",
+    "method": "toggleTrunk",
+    "arg": null,
+    "changed": false,
+    "errors": []
+  }
+]

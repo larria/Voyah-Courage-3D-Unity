@@ -1,0 +1,637 @@
+{
+  "exceptions": [],
+  "failedRequests": [],
+  "console": [
+    {
+      "level": "warning",
+      "text": "[.WebGL-0x10c0019a200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "location": {
+        "url": "http://127.0.0.1:18743/index.html",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "level": "log",
+      "text": "[UnityCache] 'http://127.0.0.1:18743/unity-player/Build/ZY.data' successfully downloaded and stored in the indexedDB cache",
+      "location": {
+        "url": "http://127.0.0.1:18743/unity-player/Build/ZY.loader.js",
+        "lineNumber": 0,
+        "columnNumber": 6191
+      }
+    },
+    {
+      "level": "log",
+      "text": "[UnityMemory] Configuration Parameters - Can be set up in boot.config\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-allocator-temp-initial-block-size-main=262144\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-allocator-temp-initial-block-size-worker=262144\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-temp-allocator-size-audio-worker=65536\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-temp-allocator-size-background-worker=32768\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-bucket-allocator-granularity=16\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-bucket-allocator-bucket-count=8\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-bucket-allocator-block-size=4194304\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-bucket-allocator-block-count=1\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-main-allocator-block-size=16777216\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-thread-allocator-block-size=16777216\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-gfx-main-allocator-block-size=16777216\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-gfx-thread-allocator-block-size=16777216\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-cache-allocator-block-size=4194304\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-typetree-allocator-block-size=2097152\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-bucket-allocator-granularity=16\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-bucket-allocator-bucket-count=8\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-bucket-allocator-block-size=4194304\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-bucket-allocator-block-count=1\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-allocator-block-size=16777216\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-profiler-editor-allocator-block-size=1048576\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-temp-allocator-size-main=4194304\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-job-temp-allocator-block-size=2097152\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-job-temp-allocator-block-size-background=1048576\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "    \"memorysetup-job-temp-allocator-reduction-small-platforms=262144\"\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "[Physics::Module] Initialized SinglethreadedJobDispatcher.\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Loading player data from data.unity3d\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Initialize engine version: 2023.2.20f1c1 (ceda3f59bbc9)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Creating WebGL 2.0 context.",
+      "location": {
+        "url": "http://127.0.0.1:18743/unity-player/Build/ZY.loader.js",
+        "lineNumber": 0,
+        "columnNumber": 1293
+      }
+    },
+    {
+      "level": "log",
+      "text": "Renderer: WebKit WebGL\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Vendor:   WebKit\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Version:  OpenGL ES 3.0 (WebGL 2.0 (OpenGL ES 3.0 Chromium))\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "GLES:     3\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": " EXT_clip_control EXT_color_buffer_float EXT_color_buffer_half_float EXT_conservative_depth EXT_depth_clamp EXT_float_blend EXT_polygon_offset_clamp EXT_texture_compression_bptc EXT_texture_compression_rgtc EXT_texture_filter_anisotropic EXT_texture_mirror_clamp_to_edge NV_shader_noperspective_interpolation OES_draw_buffers_indexed OES_sample_variables OES_shader_multisample_interpolation OES_texture_float_linear OVR_multiview2 WEBGL_clip_cull_distance WEBGL_compressed_texture_astc WEBGL_compressed_texture_etc WEBGL_compressed_texture_etc1 WEBGL_compressed_texture_s3tc WEBGL_compressed_texture_s3tc_srgb WEBGL_debug_renderer_info WEBGL_debug_shaders WEBGL_lose_context WEBGL_multi_draw WEBGL_polygon_mode WEBGL_stencil_texturing GL_EXT_clip_control GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_conservative_depth GL_EXT_depth_clamp GL_EXT_float_blend GL_EXT_polygon_offset_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_rgtc GL_EXT_texture_filter_anisotropic GL_EXT_texture_mirro\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "r_clamp_to_edge GL_NV_shader_noperspective_interpolation GL_OES_draw_buffers_indexed GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_texture_float_linear GL_OVR_multiview2 GL_WEBGL_clip_cull_distance GL_WEBGL_compressed_texture_astc GL_WEBGL_compressed_texture_etc GL_WEBGL_compressed_texture_etc1 GL_WEBGL_compressed_texture_s3tc GL_WEBGL_compressed_texture_s3tc_srgb GL_WEBGL_debug_renderer_info GL_WEBGL_debug_shaders GL_WEBGL_lose_context GL_WEBGL_multi_draw GL_WEBGL_polygon_mode GL_WEBGL_stencil_texturing\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "OPENGL LOG: Creating OpenGL ES 3.0 graphics device ; Context level  <OpenGL ES 3.0> ; Context handle 1\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "ERROR: Shader ",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Hidden/Universal/HDRDebugView shader is not supported on this GPU (none of subshaders/fallbacks are suitable)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "ERROR: Shader ",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Hidden/Universal Render Pipeline/ProbeVolumeDebug shader is not supported on this GPU (none of subshaders/fallbacks are suitable)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "ERROR: Shader ",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Hidden/Universal Render Pipeline/ProbeVolumeOffsetDebug shader is not supported on this GPU (none of subshaders/fallbacks are suitable)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "ERROR: Shader ",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Hidden/Universal Render Pipeline/ProbeVolumeSamplingDebug shader is not supported on this GPU (none of subshaders/fallbacks are suitable)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "Input Manager initialize...\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "WARNING: RGBA Compressed ASTC10X10 UFloat format is not supported, decompressing texture\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "WARNING: RGBA Compressed ASTC10X10 UFloat format is not supported, decompressing texture\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "WARNING: RGBA Compressed ASTC12X12 UFloat format is not supported, decompressing texture\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "WARNING: RGBA Compressed ASTC10X10 UFloat format is not supported, decompressing texture\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "[Physics::Module] Initialized SinglethreadedJobDispatcher.\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "UnloadTime: 2.899999 ms\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "log",
+      "text": "SN.进场\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "warning",
+      "text": "Additional Lights Cookie Format (GrayscaleHigh) is not supported by the platform. Falling back to 32-bit format (RGBA8 UNorm)\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30664
+      }
+    },
+    {
+      "level": "warning",
+      "text": "[.WebGL-0x10c0019ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+      "location": {
+        "url": "http://127.0.0.1:18743/index.html",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "level": "warning",
+      "text": "[.WebGL-0x10c0019ea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+      "location": {
+        "url": "http://127.0.0.1:18743/index.html",
+        "lineNumber": 0,
+        "columnNumber": 0
+      }
+    },
+    {
+      "level": "error",
+      "text": "LDB\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "T\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "DR19\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "MPVALLSHEHAHF\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "log",
+      "text": "SN.车漆\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30703
+      }
+    },
+    {
+      "level": "error",
+      "text": "R\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "0\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "P\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "2\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "Q\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "1\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "R\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    },
+    {
+      "level": "error",
+      "text": "0\n",
+      "location": {
+        "url": "blob:http://127.0.0.1:18743/a80250bb-15b7-4913-ab59-ad6836f55514",
+        "lineNumber": 8,
+        "columnNumber": 30631
+      }
+    }
+  ],
+  "lifecycle": "ready"
+}

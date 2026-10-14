@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Build/ZY.loader.js",
+    "bytes": 24265,
+    "official_sha256": "eb748f3a4b8ac374ad9f8a1d2e380199e25bdbc1e18b340eb152358b8376c35c",
+    "local_sha256": "eb748f3a4b8ac374ad9f8a1d2e380199e25bdbc1e18b340eb152358b8376c35c",
+    "identical": true
+  },
+  {
+    "path": "Build/ZY.framework.js",
+    "bytes": 325715,
+    "official_sha256": "57840f2772f79a384d174c758005bd879095f61ddd477b9de1f13444076ffed0",
+    "local_sha256": "57840f2772f79a384d174c758005bd879095f61ddd477b9de1f13444076ffed0",
+    "identical": true
+  },
+  {
+    "path": "Build/ZY.wasm",
+    "bytes": 14549545,
+    "official_sha256": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba",
+    "local_sha256": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba",
+    "identical": true
+  },
+  {
+    "path": "Build/ZY.data",
+    "bytes": 30518614,
+    "official_sha256": "6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f",
+    "local_sha256": "6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f",
+    "identical": true
+  },
+  {
+    "path": "src/$.js",
+    "bytes": 5521,
+    "official_sha256": "2e6e3238caa50146953e0e7ad6b4352336b4113481fb1a00c6593f2fdfcdc831",
+    "local_sha256": "2e6e3238caa50146953e0e7ad6b4352336b4113481fb1a00c6593f2fdfcdc831",
+    "identical": true
+  }
+]

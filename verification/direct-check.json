@@ -1,0 +1,29 @@
+{
+  "desktop": {
+    "iframes": 0,
+    "stageHeight": 684,
+    "canvasWidth": 2560,
+    "canvasHeight": 1368,
+    "paint": "玄英黑",
+    "invalidPaint": "不支持的车色：INVALID",
+    "fullscreen": {
+      "active": true,
+      "height": 900
+    }
+  },
+  "mobile": {
+    "iframes": 0,
+    "stageHeight": 574,
+    "canvasWidth": 780,
+    "canvasHeight": 1148,
+    "paint": "玄英黑",
+    "invalidPaint": "不支持的车色：INVALID",
+    "fullscreen": {
+      "active": true,
+      "height": 844
+    }
+  },
+  "matched_viewport": {
+    "identical": true
+  }
+}

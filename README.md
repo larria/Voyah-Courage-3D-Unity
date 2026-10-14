@@ -8,6 +8,24 @@ python tools/serve.py
 
 访问 http://127.0.0.1:18743/index.html 。需要 HTTP 服务，不能双击 HTML 使用 file://。
 
+## 当前版本：单页 Canvas 直出
+
+主页面已移除 iframe，直接启动原始 Unity canvas。原始 `unity-player/index.html` 保留作为对照入口，不是主页面依赖。
+
+展示高度自适应：桌面约窗口高度76%，手机约68%，有最小/最大高度保护；支持全屏。放大仍可能因相机近距离而裁切，增加画布高度不是无限缩放保证。
+
+控制层预备接口：
+
+```js
+await window.car.ready();
+await window.car.setPaint('XYH'); // QGJ / XYH / JSH / NUB
+window.car.capabilities; // ['setPaint']
+```
+
+加载失败会拒绝 ready()，无效颜色会报错。门窗、灯光、行驶接口尚未暴露，留待下一版逐项验证。
+
+`verification/direct-check.json`：桌面1280×900画布展示高684px，手机390×844展示高574px；按钮换色、全屏及无效颜色保护通过。同609×300视口、DPR=2且排除界面覆盖层时，直出模型截图与官网参考逐像素相同。改变展示区尺寸后构图自然变化，不等于整页截图与官网一致。
+
 ## 实现范围
 
 - 原始 Unity WebGL 模型、Shader、贴图、光照、动画与射线热点完整保留，没有用 Three.js 重建。

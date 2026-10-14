@@ -1,0 +1,386 @@
+[
+  {
+    "kind": "door",
+    "id": 4,
+    "open": true,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-door-4-True.png"
+  },
+  {
+    "kind": "door",
+    "id": 4,
+    "open": false,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-door-4-False.png"
+  },
+  {
+    "kind": "door",
+    "id": 8,
+    "open": true,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 2,
+          "direction": 1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-door-8-True.png"
+  },
+  {
+    "kind": "door",
+    "id": 8,
+    "open": false,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-door-8-False.png"
+  },
+  {
+    "kind": "window",
+    "id": 4,
+    "open": true,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-window-4-True.png"
+  },
+  {
+    "kind": "window",
+    "id": 4,
+    "open": false,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-window-4-False.png"
+  },
+  {
+    "kind": "window",
+    "id": 8,
+    "open": true,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 2,
+          "direction": 1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-window-8-True.png"
+  },
+  {
+    "kind": "window",
+    "id": 8,
+    "open": false,
+    "return": {
+      "dispatched": true
+    },
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    },
+    "logs": [],
+    "screenshot": "right-window-8-False.png"
+  }
+]

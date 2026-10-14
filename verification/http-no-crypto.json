@@ -1,0 +1,15 @@
+{
+  "errors": [],
+  "cryptoAbsent": "undefined",
+  "state": {
+    "lifecycle": "ready",
+    "requested": {
+      "paint": "QGJ",
+      "interior": "R",
+      "doors": {
+        "LF": true
+      }
+    },
+    "observed": null
+  }
+}

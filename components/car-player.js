@@ -1,6 +1,8 @@
 import { createRuntimeControls } from './runtime-controls.js';
+import { createDoorControls } from './door-controls.js';
 const active = { player: null };
 const loaders = new Map();
+let canvasSequence = 0;
 export const PAINTS = Object.freeze({ QGJ: '香槟金', XYH: '玄英黑', JSH: '宸星灰', NUB: '杜若白' });
 export const INTERIORS = Object.freeze({ R: '旭日红', P: '深海蓝', Q: '皓月白' });
 export const DOORS = Object.freeze({ LF: 1, LB: 2, RF: 4, RB: 8 });
@@ -45,7 +47,8 @@ export class CarPlayer extends EventTarget {
     this._base = new URL(options.assetBaseUrl ?? '../unity-player/', import.meta.url);
     if (!this._base.pathname.endsWith('/')) this._base.pathname += '/';
     this.canvas = document.createElement('canvas');
-    this.canvas.id = `voyah-canvas-${crypto.randomUUID()}`;
+    do { this.canvas.id = `voyah-canvas-${++canvasSequence}`; }
+    while (document.getElementById(this.canvas.id));
     this.canvas.tabIndex = 0;
     this.canvas.setAttribute('aria-label', '岚图知音三维模型');
     Object.assign(this.canvas.style, { width: '100%', height: '100%', display: 'block', touchAction: 'none', background: 'transparent' });
@@ -96,10 +99,11 @@ export class CarPlayer extends EventTarget {
   getState() { return { lifecycle: this._phase, requested: structuredClone(this._requested), observed: null }; }
   getCapabilities() {
     return {
-      verified: ['setPaint','setInterior','setHeadlights','setDriving','setWheelType','toggleTrunk'],
+      verified: ['setPaint','setInterior','setHeadlights','setDriving','setWheelType','toggleTrunk','setDoor','setWindow'],
       preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
-      unavailable: ['setDoor','setWindow','setTrunk','setDoorSpeed','setWheelAngle'],
+      unavailable: ['setTrunk','setDoorSpeed','setWheelAngle'],
+      buildSpecific: ['setDoor','setWindow'],
       stateReadback: false, multipleInstances: false,
     };
   }
@@ -143,8 +147,34 @@ export class CarPlayer extends EventTarget {
     if (!Number.isInteger(index) || index < 0 || index > 2) return Promise.reject(new CarPlayerError('UNSUPPORTED', '目前仅支持已探测相机 preset=0/1/2，其余请使用实验接口'));
     return this._send('carCameraperspective', index, 'camera');
   }
-  setDoor() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '原版没有已验证的 JS 门状态入口，保留模型点击交互')); }
-  setWindow() { return Promise.reject(new CarPlayerError('UNSUPPORTED', '原版没有已验证的 JS 车窗状态入口')); }
+  async _getDoorControls() {
+    this._assertAlive(); await this._ready; this._assertAlive();
+    if (!this._doorControlsPromise) {
+      const instance = this._instance;
+      this._doorControlsPromise = createDoorControls(instance, { wasmUrl: new URL('Build/ZY.wasm', this._base).href }).then(controls => {
+        this._assertAlive();
+        if (this._instance !== instance) throw new CarPlayerError('DESTROYED', '运行实例已变化');
+        return controls;
+      }).catch(error => {
+        this._doorControlsPromise = null;
+        throw error instanceof CarPlayerError ? error : new CarPlayerError('UNSUPPORTED_BUILD', error.message);
+      });
+    }
+    return this._doorControlsPromise;
+  }
+  async _setOpening(kind, id, open, { animate = true } = {}) {
+    if (!Object.hasOwn(DOORS, id) || typeof open !== 'boolean' || typeof animate !== 'boolean') {
+      throw new CarPlayerError('INVALID_ARGUMENT', 'id 必须为 LF/LB/RF/RB，open 和 animate 必须为 boolean');
+    }
+    const controls = await this._getDoorControls(); this._assertAlive();
+    controls[kind === 'door' ? 'setDoor' : 'setWindow'](id, open, animate);
+    const key = kind === 'door' ? 'doors' : 'windows';
+    this._requested[key] = { ...this._requested[key], [id]: open };
+    const result = { id: ++this._sequence, method: kind === 'door' ? 'setDoor' : 'setWindow', door: id, open, animate, status: 'dispatched', observed: false };
+    this._emit('command', result); return result;
+  }
+  setDoor(id, open, options) { return this._setOpening('door', id, open, options); }
+  setWindow(id, open, options) { return this._setOpening('window', id, open, options); }
   async toggleTrunk() {
     this._assertAlive(); await this._ready; this._assertAlive();
     createRuntimeControls(this._instance).toggleTrunk();

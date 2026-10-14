@@ -1,0 +1,99 @@
+[
+  {
+    "label": "bad-id",
+    "rejected": true,
+    "error": "Door ID must be LF/LB/RF/RB or 1/2/4/8."
+  },
+  {
+    "label": "bad-bool",
+    "rejected": true,
+    "error": "open and animate must be booleans."
+  },
+  {
+    "label": "bad-build",
+    "rejected": true,
+    "error": "Unsupported Unity build; original door bridge disabled."
+  },
+  {
+    "label": "all-open-instant",
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "LB": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RB": {
+          "phase": 2,
+          "direction": 1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "LB": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RF": {
+          "phase": 2,
+          "direction": 1
+        },
+        "RB": {
+          "phase": 2,
+          "direction": 1
+        }
+      }
+    }
+  },
+  {
+    "label": "all-closed-instant",
+    "state": {
+      "doors": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      },
+      "windows": {
+        "LF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "LB": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RF": {
+          "phase": 0,
+          "direction": -1
+        },
+        "RB": {
+          "phase": 0,
+          "direction": -1
+        }
+      }
+    }
+  }
+]

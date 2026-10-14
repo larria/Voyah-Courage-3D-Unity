@@ -36,7 +36,7 @@ await player.setHeadlights(true);
 - `getState()`：lifecycle + requested + observed:null。requested仅为命令请求，不冒充Unity真实回读。
 - `destroy(): Promise<void>`：幂等，Quit并释放canvas和实例锁。加载中销毁要等待后台加载结束，不保证立即完成。
 
-控制Promise返回 `{id,method,value,status:'dispatched',observed:false}`，只表示派发。错误为CarPlayerError，含code/message。错误码INVALID_ARGUMENT、INSTANCE_ACTIVE、LOAD_FAILED、TIMEOUT、RUNTIME_ERROR、DESTROYED、UNSUPPORTED。
+控制Promise返回 `{id,method,value,status:'dispatched',observed:false}`，只表示派发。错误为CarPlayerError，含code/message。错误码INVALID_ARGUMENT、INSTANCE_ACTIVE、LOAD_FAILED、TIMEOUT、RUNTIME_ERROR、DESTROYED、UNSUPPORTED、UNSUPPORTED_BUILD。
 
 事件为EventTarget/CustomEvent：progress、ready、error、runtime-log、command、destroyed，数据在event.detail。组件销毁后业务方可释放整个对象及自己添加的监听。
 
@@ -48,9 +48,21 @@ await player.setHeadlights(true);
 ## 门窗尾门限制
 尾门已打通`toggleTrunk()`：场景同时有根`/ZY`和`/ZY/ZY-new/ZY`同名网格，裸ZY命中错误对象；绝对路径解决。`setTrunk`仍拒绝，因为无真实回读不能可靠实现幂等。
 
-`setDoor/setWindow`仍拒绝UNSUPPORTED。正确/ZY目标下toggleDoor/Window的DoorID枚举经Unity _SendMessageFloat产生托管异常，不是数值猜错。LF=1、LB=2、RF=4、RB=8。多参数setDoors/setDoorWindows无法经单参SendMessage派发，热点onTrigger是委托字段。原始wasm无导出IL2CPP反射调用API，函数表缺实例指针/MethodInfo映射，未进行不可靠内存或二进制改写。
+四门四窗已通过原始 WASM 方法桥实现：
+```js
+await player.setDoor('LF', true);  // 左前门打开
+await player.setDoor('LF', false); // 左前门关闭
+await player.setWindow('LB', true); // 左后窗下降
+await player.setWindow('RB', false, { animate: false });
+```
+ID仅支持LF左前/LB左后/RF右前/RB右后。open、animate为boolean，animate默认true，使用原始动画幅度和速度。
 
-本版仍不是全部功能完成：四门四窗JS入口、门速/轮转角、完整配置值域及真实状态回读未解决。充电线、门把手、后Logo灯在当前前视角无变化，不能宣称生效。setVersion=2有变化但语义未确认，继续留实验接口。
+普通SendMessage确实无法传DoorID枚举；新模块`door-controls.js`从当前构建的原始IL2CPP注册定位setter，动态识别唯一实例并调用原始函数。不重写动画、不直接写内存、不模拟屏幕点击、不修改Unity资源。首次调用会读取WASM并校验SHA256、注册表与实例类型，构建改变或实例不匹配即拒绝UNSUPPORTED_BUILD。首次初始化较慢，后续同实例缓存；销毁后禁止使用。此桥是当前构建专用，不保证升级其他Unity发布包可用。
 
-## 验证
-独立测试页 `/examples/api.html`；运行证据 `verification/component-check.json`、`component-*.png`、`api-probe.json`。每步截取viewer画面，而非仅看按钮文字。内饰三色、大灯往返、行驶往返、销毁重挂载、非法参数、重复实例均实际驱动。新一轮测试验证轮毂0/1、尾门两次切换、日行灯和位置灯往返、后视镜两方向及相机0/1/2。详细原始探测在verification/extended-api/results.json，尾门接收对象证据在verification/scene-bindings.json和scene-api-check.log；候选接口未完整验证。
+内部动画phase不是0–1比例，本版不作为公共真实状态返回，命令仍只报告dispatched。
+
+本版仍不是全部功能完成：门速/轮转角、完整配置值域及通用真实状态回读未解决。门窗开关可通过verification/door-component-check.py重新执行运行验收。充电线、门把手、后Logo灯在当前前视角无变化，不能宣称生效。setVersion=2有变化但语义未确认，继续留实验接口。
+
+## 验证与接入说明
+
+完整部署、资源目录、事件与错误、接口示例、能力边界见项目根目录README。核心回归脚本位于verification/component-check.py和door-component-check.py，可重新生成运行证据。离线必要文件及hash见offline-manifest.json。

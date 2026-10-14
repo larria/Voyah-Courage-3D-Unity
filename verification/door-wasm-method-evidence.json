@@ -1,0 +1,39 @@
+{
+  "wasmSha256": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba",
+  "codegenModuleAddress": 2069616,
+  "codegenModuleName": "com.ziz.configurator.Runtime.dll",
+  "methodCount": 206,
+  "methodPointersAddress": 2380768,
+  "methods": {
+    "carStatusScene": {
+      "token": "0x37",
+      "tableIndex": 26437,
+      "wasmFunctionIndex": 565,
+      "originalWasmInstructions": "  (func (;565;) (type 2) (param i32 i32 i32)\n    nop)"
+    },
+    "setDoor": {
+      "token": "0x42",
+      "tableIndex": 26448,
+      "wasmFunctionIndex": 9519,
+      "originalWasmInstructions": "  (func (;9519;) (type 7) (param i32 i32 i32 i32 i32)\n    i32.const 3339479\n    i32.load8_u\n    i32.eqz\n    if  ;; label = @1\n      i32.const 2380384\n      call 409\n      i32.const 3339479\n      i32.const 1\n      i32.store8\n    end\n    local.get 0\n    i32.load offset=292\n    local.get 1\n    i32.const 2380384\n    i32.load\n    call 4100\n    local.get 2\n    local.get 3\n    local.get 3\n    call 3279)"
+    },
+    "toggleDoor": {
+      "token": "0x41",
+      "tableIndex": 26447,
+      "wasmFunctionIndex": 5419,
+      "originalWasmInstructions": "  (func (;5419;) (type 2) (param i32 i32 i32)\n    i32.const 3339478\n    i32.load8_u\n    i32.eqz\n    if  ;; label = @1\n      i32.const 2380384\n      call 409\n      i32.const 3339478\n      i32.const 1\n      i32.store8\n    end\n    local.get 0\n    local.get 1\n    local.get 0\n    i32.load offset=292\n    local.get 1\n    i32.const 2380384\n    i32.load\n    call 4100\n    f32.load offset=40\n    f32.const 0x0p+0 (;=0;)\n    f32.lt\n    i32.const 1\n    local.get 1\n    call 9519)"
+    },
+    "setDoorWindow": {
+      "token": "0x47",
+      "tableIndex": 26453,
+      "wasmFunctionIndex": 15521,
+      "originalWasmInstructions": "  (func (;15521;) (type 7) (param i32 i32 i32 i32 i32)\n    i32.const 3339484\n    i32.load8_u\n    i32.eqz\n    if  ;; label = @1\n      i32.const 2380384\n      call 409\n      i32.const 3339484\n      i32.const 1\n      i32.store8\n    end\n    local.get 0\n    i32.load offset=296\n    local.get 1\n    i32.const 2380384\n    i32.load\n    call 4100\n    local.get 2\n    local.get 3\n    local.get 3\n    call 3279)"
+    },
+    "toggleDoorWindow": {
+      "token": "0x46",
+      "tableIndex": 26452,
+      "wasmFunctionIndex": 5418,
+      "originalWasmInstructions": "  (func (;5418;) (type 2) (param i32 i32 i32)\n    i32.const 3339483\n    i32.load8_u\n    i32.eqz\n    if  ;; label = @1\n      i32.const 2380384\n      call 409\n      i32.const 3339483\n      i32.const 1\n      i32.store8\n    end\n    local.get 0\n    local.get 1\n    local.get 0\n    i32.load offset=296\n    local.get 1\n    i32.const 2380384\n    i32.load\n    call 4100\n    f32.load offset=40\n    f32.const 0x0p+0 (;=0;)\n    f32.lt\n    i32.const 1\n    local.get 1\n    call 15521)"
+    }
+  }
+}

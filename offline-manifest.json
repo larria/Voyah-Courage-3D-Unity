@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "path": "components/car-player.js",
+      "bytes": 12915,
+      "sha256": "91ce2c168491378e76b0e71f75b80243187101b9347a21d3baa05be4a50c038a"
+    },
+    {
+      "path": "components/door-controls.js",
+      "bytes": 5622,
+      "sha256": "68d083a3c02bf575a6ae320bb5c60b82e9dc0b87b36986fed7bce0756baf1b2e"
+    },
+    {
+      "path": "components/runtime-controls.js",
+      "bytes": 1295,
+      "sha256": "fd6ac0b32337ceba498ad1b3eeb5dbf92a94c3f6f59b386a8835c45871f928f9"
+    },
+    {
+      "path": "components/sha256.js",
+      "bytes": 2505,
+      "sha256": "c3d593ca0af2a006824db191fc6c0cddf0093057fa7bbf793b33316ff7513ed9"
+    },
+    {
+      "path": "examples/api.html",
+      "bytes": 7184,
+      "sha256": "a05665f405184b73d63d7ca30f7efeb24daa70cffcf2637456c995b1ef494d5c"
+    },
+    {
+      "path": "index.html",
+      "bytes": 2681,
+      "sha256": "47a31e35af30b2b8a507600b5ad84462109dabe3d1f8aa519ca766a6e8ffa7a0"
+    },
+    {
+      "path": "tools/direct-player.js",
+      "bytes": 1622,
+      "sha256": "70ba497f7e86532e54c92a1a81b063993c935a8f92f62451e74373942c6564a5"
+    },
+    {
+      "path": "tools/serve.py",
+      "bytes": 597,
+      "sha256": "9bd6d49faa0f81c6a632a3ca15788e36218dc177dcd112816c6d33c6ed22ae2c"
+    },
+    {
+      "path": "unity-player/Build/ZY.data",
+      "bytes": 30518614,
+      "sha256": "6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f"
+    },
+    {
+      "path": "unity-player/Build/ZY.framework.js",
+      "bytes": 325715,
+      "sha256": "57840f2772f79a384d174c758005bd879095f61ddd477b9de1f13444076ffed0"
+    },
+    {
+      "path": "unity-player/Build/ZY.loader.js",
+      "bytes": 24265,
+      "sha256": "eb748f3a4b8ac374ad9f8a1d2e380199e25bdbc1e18b340eb152358b8376c35c"
+    },
+    {
+      "path": "unity-player/Build/ZY.wasm",
+      "bytes": 14549545,
+      "sha256": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba"
+    },
+    {
+      "path": "unity-player/index.html",
+      "bytes": 12955,
+      "sha256": "7d819824217de42d8345d7239a9d05b12e9a29b7be150508ec5cf26568b56707"
+    },
+    {
+      "path": "unity-player/src/$.js",
+      "bytes": 5521,
+      "sha256": "2e6e3238caa50146953e0e7ad6b4352336b4113481fb1a00c6593f2fdfcdc831"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "desktop": {
+    "errors": [],
+    "viewerStable": true,
+    "scroll": {
+      "panelScroll": 123,
+      "pageScroll": 0
+    },
+    "nonlocalRequests": [],
+    "colors": {
+      "paint": 4,
+      "interior": 3
+    }
+  },
+  "mobile": {
+    "errors": [],
+    "viewerStable": true,
+    "scroll": {
+      "panelScroll": 523,
+      "pageScroll": 0
+    },
+    "nonlocalRequests": [],
+    "colors": {
+      "paint": 4,
+      "interior": 3
+    }
+  },
+  "landscape": {
+    "errors": [],
+    "viewerStable": true,
+    "scroll": {
+      "panelScroll": 633,
+      "pageScroll": 0
+    },
+    "nonlocalRequests": [],
+    "colors": {
+      "paint": 4,
+      "interior": 3
+    }
+  }
+}

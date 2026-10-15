@@ -1,5 +1,6 @@
 import { createRuntimeControls } from './runtime-controls.js';
 import { createDoorControls } from './door-controls.js';
+import { createChargingControls } from './charging-controls.js';
 const active = { player: null };
 const loaders = new Map();
 let canvasSequence = 0;
@@ -103,7 +104,7 @@ export class CarPlayer extends EventTarget {
       preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
       unavailable: ['setTrunk','setDoorSpeed','setWheelAngle'],
-      buildSpecific: ['setDoor','setWindow'],
+      buildSpecific: ['setDoor','setWindow','setCharging','setChargingCableVisible'],
       stateReadback: false, multipleInstances: false,
     };
   }
@@ -147,6 +148,39 @@ export class CarPlayer extends EventTarget {
     if (!Number.isInteger(index) || index < 0 || index > 2) return Promise.reject(new CarPlayerError('UNSUPPORTED', '目前仅支持已探测相机 preset=0/1/2，其余请使用实验接口'));
     return this._send('carCameraperspective', index, 'camera');
   }
+  async _getChargingControls() {
+    this._assertAlive(); await this._ready; this._assertAlive();
+    if (!this._chargingControlsPromise) {
+      const instance = this._instance;
+      const pending = createChargingControls(instance, {
+        wasmUrl: new URL('Build/ZY.wasm', this._base).href,
+        dataUrl: new URL('Build/ZY.data', this._base).href,
+        isAlive: () => !this._disposed && this._phase === 'ready' && this._instance === instance,
+      }).then(controls => {
+        this._assertAlive();
+        if (this._instance !== instance) throw new CarPlayerError('DESTROYED', '运行实例已变化');
+        return controls;
+      }).catch(error => {
+        if (this._chargingControlsPromise === pending) this._chargingControlsPromise = null;
+        this._assertAlive();
+        throw error instanceof CarPlayerError ? error : new CarPlayerError('UNSUPPORTED_BUILD', error.message);
+      });
+      this._chargingControlsPromise = pending;
+    }
+    return this._chargingControlsPromise;
+  }
+  async _setChargingControl(method, value) {
+    if (typeof value !== 'boolean') throw new CarPlayerError('INVALID_ARGUMENT', '充电状态必须为 boolean');
+    const controls = await this._getChargingControls(); this._assertAlive();
+    try { controls[method](value); }
+    catch (error) { throw new CarPlayerError('UNSUPPORTED_BUILD', error.message); }
+    this._requested.charging = method === 'setCharging' && value;
+    this._requested.chargingCableVisible = value;
+    const result = { id: ++this._sequence, method, value, status: 'dispatched', observed: false };
+    this._emit('command', result); return result;
+  }
+  setCharging(on) { return this._setChargingControl('setCharging', on); }
+  setChargingCableVisible(visible) { return this._setChargingControl('setChargingCableVisible', visible); }
   async _getDoorControls() {
     this._assertAlive(); await this._ready; this._assertAlive();
     if (!this._doorControlsPromise) {

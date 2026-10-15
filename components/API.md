@@ -22,7 +22,11 @@ await player.setHeadlights(true);
 ## 规范接口
 - `ready(): Promise<CarPlayer>`：原始引擎及初始化命令完成；不代表动画已稳定。
 - `setPaint(code)`：QGJ香槟金、XYH玄英黑、JSH宸星灰、NUB杜若白。
-- `setInterior(code)`：R旭日红、P深海蓝、Q皓月白。变更真实内饰材质，不强制切换内饰相机。
+- `setInterior(code)`：R旭日红、P深海蓝、Q皓月白。只配色，不进入或退出内饰模式。
+- `enterInterior(code?)`：显式参数严格接受原生字符串 R/P/Q；省略或 undefined 时在 ready 后派发时读取最新 `requested.interior`，而非构造默认值。调用原始 `API.interiorTab`，在 command 事件前记录 interior 和 viewMode:'interior'。
+- `exitInterior()`：调用原始 `API.jumpState(1)`，记录 viewMode:'exterior'，保留内饰颜色。重复和快速命令均派发，不去重；生命周期拒绝沿用 DESTROYED。viewMode 仅请求状态，不是实际相机回读。
+
+API 页提供“进入内饰”和“返回外观”两个按钮，颜色按钮只配色。进出模式可能联动原版场景、相机、灯光或配置；不承诺保留全部其他设置，也不承诺 Promise 表示动画完成。可运行 `python3 verification/interior-mode-check.py` 查看真实 Unity 画面证据。
 - `setHeadlights(boolean)`：原始API.setFrontLight，开关画面变化实测。
 - `setDriving(boolean)`：API.carDrivingStatus，启动/停止画面变化实测；并非真实车辆控制。
 - `setCharging(on)`：严格boolean，true请求充电展示、false请求停止；当前构建专用桥，首次调用按需校验WASM。

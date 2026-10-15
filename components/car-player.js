@@ -100,7 +100,7 @@ export class CarPlayer extends EventTarget {
   getState() { return { lifecycle: this._phase, requested: structuredClone(this._requested), observed: null }; }
   getCapabilities() {
     return {
-      verified: ['setPaint','setInterior','setHeadlights','setDriving','setWheelType','toggleTrunk','setDoor','setWindow'],
+      verified: ['setPaint','setInterior','enterInterior','exitInterior','setHeadlights','setDriving','setWheelType','toggleTrunk','setDoor','setWindow'],
       preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
       unavailable: ['setTrunk','setDoorSpeed','setWheelAngle'],
@@ -110,9 +110,11 @@ export class CarPlayer extends EventTarget {
   }
   async _send(method, value, stateKey) {
     this._assertAlive(); await this._ready; this._assertAlive();
+    if (typeof value === 'function') value = value();
     if (value === undefined) this._instance.SendMessage('API', method);
     else this._instance.SendMessage('API', method, value);
-    if (stateKey) this._requested[stateKey] = value;
+    if (typeof stateKey === 'string') this._requested[stateKey] = value;
+    else if (stateKey) Object.assign(this._requested, typeof stateKey === 'function' ? stateKey(value) : stateKey);
     const result = { id: ++this._sequence, method, value, status: 'dispatched', observed: false };
     this._emit('command', result); return result;
   }
@@ -124,6 +126,11 @@ export class CarPlayer extends EventTarget {
     if (!Object.hasOwn(INTERIORS, code)) return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', 'interior 必须为 R/P/Q'));
     return this._send('interior', code, 'interior');
   }
+  enterInterior(code) {
+    if (code !== undefined && (typeof code !== 'string' || !Object.hasOwn(INTERIORS, code))) return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', 'interior 必须为 R/P/Q'));
+    return this._send('interiorTab', () => code ?? this._requested.interior, interior => ({ interior, viewMode: 'interior' }));
+  }
+  exitInterior() { return this._send('jumpState', 1, { viewMode: 'exterior' }); }
   _boolean(method, value, key) {
     if (typeof value !== 'boolean') return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', '状态必须为 boolean'));
     return this._send(method, value ? 1 : 0, key);

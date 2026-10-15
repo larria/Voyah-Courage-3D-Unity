@@ -2,6 +2,12 @@
 
 本文记录本项目从官网观察、资源定位、原始运行时落地到门窗API封装的实际过程，并说明证据、失败路径与后续维护方法。面向开发人员；部署与业务使用请先阅读README及components/API.md。
 
+## 内饰模式规范封装
+
+`enterInterior(code?)` 复用原始 `API.interiorTab`；`exitInterior()` 复用 `API.jumpState(1)`。只接受 R/P/Q 原生字符串；省略参数延迟至 ready 后读取 requested.interior，避免初始化旧颜色。`_send` 保留既有单字段调用并最小支持多字段更新，在 command 事件前登记 interior/viewMode；重复命令不去重。setInterior 仍只配色。所有结果只是 dispatched/observed:false，不提供动画完成或真实状态回读。
+
+`verification/interior-mode-check.py` 自启停隔离 HTTP 服务，以真实 Playwright API 页按钮驱动三色入退出、内部配色、canvas 拖动旋转及充电门窗回归；公开页面 API 检查 ready 前队列、快速重复、严格参数和销毁拒绝。子路径下只移除 subtle，保留 Unity 随机源 getRandomValues，运行前后核对 Build 与门窗充电模块 hash；截图与紧凑 JSON 保存在 verification。原始模式调用副作用须依据画面记录，不因请求状态而推断所有灯光/配置已恢复。实际截图观察到：进入后切换为座舱正视，R/P/Q 的方向盘、仪表台和中控配色不同；P 帧整体亮度也与 R/Q 不同。返回外观恢复车辆外部视角，内饰拖动改变观察方向。这些是原始材质/场景/相机调用的画面观察，不把亮度差归因于已确认的灯光状态，也不承诺动画完成。
+
 ## 1. 目标与原则
 
 目标是在本地使用原始车辆模型、材质、灯光、动画及交互，并向业务提供可重复调用的JS接口。核心原则：

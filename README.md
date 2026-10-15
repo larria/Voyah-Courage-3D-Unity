@@ -7,7 +7,9 @@
 ## 功能概览
 
 - 旋转、缩放、模型原生点击交互。
-- 四种外观车色、三种内饰配色。
+- 四种外观车色、三种内饰配色；`enterInterior(code?)` / `exitInterior()` 进入内饰与返回外观，API 页提供两个独立按钮。
+  `setInterior` 只配色；进入参数严格为 R/P/Q，省略时等 ready 后读取最新请求颜色。退出保留颜色请求；重复不去重，command 前更新 requested.viewMode/interior，结果仍为 dispatched/observed:false，不表示相机回读或动画完成。原始调用可能联动场景/灯光等，不能承诺其他设置全部保持。
+  可复跑画面验收：`python3 verification/interior-mode-check.py`（Playwright Chromium、Pillow），子路径无 subtle 时保留 getRandomValues；截图与紧凑 JSON 在 verification 内，服务自动停止。
 - 四门、四窗分别开关，支持原始动画或即时切换。
 - 尾门切换、两种轮毂、大灯、行驶展示。
 - 日行灯、位置灯、后视镜、锁车、寻车、转向闪烁、相机预设等预览接口。

@@ -1,0 +1,1155 @@
+Starting real browser at http://127.0.0.1:62689/charging-subpath/examples/api.html
+Captured hidden
+Captured static
+Captured animated
+Captured stopped
+Captured flow_to_static
+/Users/larkin_1/Downloads/知音3d/verification/charging-check.py:35: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  pixels = list(d.getdata())
+Captured remounted
+{
+  "surface": "real examples/api.html buttons and public window.player",
+  "observed_state_readback": "read-only diagnostic bridge observer plus rendered pixels; all mutations via UI/public API",
+  "errors": [],
+  "checks": {
+    "no_crypto_ready": true,
+    "capabilities": {
+      "verified": [
+        "setPaint",
+        "setInterior",
+        "setHeadlights",
+        "setDriving",
+        "setWheelType",
+        "toggleTrunk",
+        "setDoor",
+        "setWindow"
+      ],
+      "preview": [
+        "setMirrors",
+        "setCameraPreset",
+        "setDaytimeRunningLights",
+        "setPositionLights",
+        "setLocked",
+        "flashTurnSignals",
+        "findCar"
+      ],
+      "experimental": [
+        "setCarPaint",
+        "setInteriorMaterial",
+        "setWheelType",
+        "setVersion",
+        "setRearview",
+        "setFrontLight",
+        "setDaytimeRunningLight",
+        "setpositionLampLight",
+        "setRearLogoLightLight",
+        "setCarChargingCable",
+        "setCarDoorHandle",
+        "setCarseat",
+        "jumpState",
+        "carCameraperspective",
+        "carLockStatus",
+        "carlightStatus",
+        "carSetDaytimeRunningLight",
+        "carsetpositionLampLight",
+        "carsetRearLogoLightLight",
+        "carDrivingStatus",
+        "featureCodesUrl",
+        "versionTab",
+        "exteriorTab",
+        "hubTab",
+        "interiorTab",
+        "version",
+        "package",
+        "exterior",
+        "hub",
+        "interior",
+        "carStatusScene",
+        "setLightBinker",
+        "carControlFindCar"
+      ],
+      "unavailable": [
+        "setTrunk",
+        "setDoorSpeed",
+        "setWheelAngle"
+      ],
+      "buildSpecific": [
+        "setDoor",
+        "setWindow",
+        "setCharging",
+        "setChargingCableVisible"
+      ],
+      "stateReadback": false,
+      "multipleInstances": false
+    },
+    "hidden_button": "已派发：carCameraperspective",
+    "static_button": "已派发：setChargingCableVisible",
+    "animated_button": "已派发：setCharging",
+    "stopped_button": "已派发：setCharging",
+    "flow_to_static_button": "已派发：setChargingCableVisible",
+    "invalid_boolean": {
+      "setCharging": [
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT"
+      ],
+      "setChargingCableVisible": [
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT",
+        "INVALID_ARGUMENT"
+      ]
+    },
+    "door_open_feedback": "已派发：setChargingCableVisible",
+    "door_close_feedback": "已派发：setDoor",
+    "door_visual": {
+      "open": {
+        "mean_abs_rgb": 2.86352,
+        "pixels_gt_12": 14741,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          336,
+          554,
+          490
+        ]
+      },
+      "close": {
+        "mean_abs_rgb": 2.86352,
+        "pixels_gt_12": 14741,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          336,
+          554,
+          490
+        ]
+      }
+    },
+    "window_open_feedback": "已派发：setWindow",
+    "window_close_feedback": "已派发：setWindow",
+    "window_visual": {
+      "open": {
+        "mean_abs_rgb": 0.07226,
+        "pixels_gt_12": 695,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          338,
+          440,
+          380
+        ]
+      },
+      "close": {
+        "mean_abs_rgb": 0.07226,
+        "pixels_gt_12": 695,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          338,
+          440,
+          380
+        ]
+      }
+    },
+    "before_destroy": {
+      "lifecycle": "ready",
+      "requested": {
+        "paint": "QGJ",
+        "interior": "R",
+        "camera": 0,
+        "charging": false,
+        "chargingCableVisible": true,
+        "doors": {
+          "RB": false
+        },
+        "windows": {
+          "RB": false
+        }
+      },
+      "observed": null
+    },
+    "destroyed_api": "DESTROYED",
+    "remount_feedback": "模型已就绪",
+    "remount_state": {
+      "lifecycle": "ready",
+      "requested": {
+        "paint": "QGJ",
+        "interior": "R"
+      },
+      "observed": null
+    }
+  },
+  "url": "http://127.0.0.1:62689/charging-subpath/examples/api.html",
+  "focus_diagnostic": {
+    "visibility": "visible",
+    "hasFocus": true,
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 720,
+      "height": 850,
+      "top": 0,
+      "right": 720,
+      "bottom": 850,
+      "left": 0
+    }
+  },
+  "runtime_at_capture": {
+    "hidden": [
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 14.899999618530273,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 14.899999618530273,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 14.899999618530273,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 14.899999618530273,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 14.899999618530273,
+        "speed": 0.4000000059604645
+      }
+    ],
+    "static": [
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      }
+    ],
+    "animated": [
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 5.576800346374512,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 7.862960338592529,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 9.708321571350098,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 12.272600173950195,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 14.353681564331055,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 16.20492172241211,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 18.231719970703125,
+        "speed": 0.4000000059604645
+      }
+    ],
+    "stopped": [
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": false,
+        "activeInHierarchy": false,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 0,
+        "speed": 0.4000000059604645
+      }
+    ],
+    "flow_to_static": [
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 3.2893600463867188,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 3.2893600463867188,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 3.2893600463867188,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 3.2893600463867188,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": false,
+        "mode": "static",
+        "offset": 3.2893600463867188,
+        "speed": 0.4000000059604645
+      }
+    ],
+    "remounted": [
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 22.358917236328125,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 24.113313674926758,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 25.853317260742188,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 27.786039352416992,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 29.586759567260742,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 31.63636016845703,
+        "speed": 0.4000000059604645
+      },
+      {
+        "cableVisible": true,
+        "activeInHierarchy": true,
+        "enabled": true,
+        "charging": true,
+        "mode": "flowing",
+        "offset": 33.51579666137695,
+        "speed": 0.4000000059604645
+      }
+    ]
+  },
+  "requested_at_capture": {
+    "hidden": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": false,
+      "chargingCableVisible": false
+    },
+    "static": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": false,
+      "chargingCableVisible": true
+    },
+    "animated": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": true,
+      "chargingCableVisible": true
+    },
+    "stopped": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": false,
+      "chargingCableVisible": false
+    },
+    "flow_to_static": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": false,
+      "chargingCableVisible": true
+    },
+    "remounted": {
+      "paint": "QGJ",
+      "interior": "R",
+      "camera": 0,
+      "charging": true,
+      "chargingCableVisible": true
+    }
+  },
+  "server_stopped": true,
+  "cable_roi": [
+    405,
+    385,
+    535,
+    555
+  ],
+  "frame_diffs": {
+    "hidden": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      }
+    ],
+    "static": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      }
+    ],
+    "animated": [
+      {
+        "mean_abs_rgb": 0.01921,
+        "pixels_gt_12": 225,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          482,
+          524
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.0109,
+        "pixels_gt_12": 120,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          453,
+          467
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01147,
+        "pixels_gt_12": 120,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          538,
+          533
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01425,
+        "pixels_gt_12": 161,
+        "total_pixels": 612000,
+        "bbox": [
+          460,
+          510,
+          538,
+          533
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01425,
+        "pixels_gt_12": 161,
+        "total_pixels": 612000,
+        "bbox": [
+          460,
+          510,
+          533,
+          533
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.00019,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": [
+          515,
+          530,
+          538,
+          533
+        ]
+      }
+    ],
+    "stopped": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      }
+    ],
+    "flow_to_static": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 612000,
+        "bbox": null
+      }
+    ],
+    "door": [
+      {
+        "mean_abs_rgb": 2.86352,
+        "pixels_gt_12": 14741,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          336,
+          554,
+          490
+        ]
+      },
+      {
+        "mean_abs_rgb": 2.86352,
+        "pixels_gt_12": 14741,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          336,
+          554,
+          490
+        ]
+      }
+    ],
+    "window": [
+      {
+        "mean_abs_rgb": 0.07226,
+        "pixels_gt_12": 695,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          338,
+          440,
+          380
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.07226,
+        "pixels_gt_12": 695,
+        "total_pixels": 612000,
+        "bbox": [
+          400,
+          338,
+          440,
+          380
+        ]
+      }
+    ],
+    "remounted": [
+      {
+        "mean_abs_rgb": 0.02184,
+        "pixels_gt_12": 208,
+        "total_pixels": 612000,
+        "bbox": [
+          67,
+          339,
+          531,
+          548
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.00064,
+        "pixels_gt_12": 21,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          451,
+          431
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.00425,
+        "pixels_gt_12": 80,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          452,
+          448
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01978,
+        "pixels_gt_12": 215,
+        "total_pixels": 612000,
+        "bbox": [
+          443,
+          409,
+          467,
+          517
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01237,
+        "pixels_gt_12": 182,
+        "total_pixels": 612000,
+        "bbox": [
+          448,
+          417,
+          467,
+          517
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.03038,
+        "pixels_gt_12": 311,
+        "total_pixels": 612000,
+        "bbox": [
+          448,
+          417,
+          503,
+          530
+        ]
+      }
+    ]
+  },
+  "cable_roi_diffs": {
+    "hidden": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      }
+    ],
+    "static": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      }
+    ],
+    "animated": [
+      {
+        "mean_abs_rgb": 0.53195,
+        "pixels_gt_12": 225,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          77,
+          139
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.30176,
+        "pixels_gt_12": 120,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          48,
+          82
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.31756,
+        "pixels_gt_12": 120,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          130,
+          147
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.39449,
+        "pixels_gt_12": 161,
+        "total_pixels": 22100,
+        "bbox": [
+          55,
+          125,
+          130,
+          148
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.39448,
+        "pixels_gt_12": 161,
+        "total_pixels": 22100,
+        "bbox": [
+          55,
+          125,
+          128,
+          148
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.00505,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": [
+          110,
+          145,
+          130,
+          148
+        ]
+      }
+    ],
+    "stopped": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      }
+    ],
+    "flow_to_static": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      }
+    ],
+    "door": [
+      {
+        "mean_abs_rgb": 41.44087,
+        "pixels_gt_12": 9580,
+        "total_pixels": 22100,
+        "bbox": [
+          16,
+          0,
+          130,
+          105
+        ]
+      },
+      {
+        "mean_abs_rgb": 41.44087,
+        "pixels_gt_12": 9580,
+        "total_pixels": 22100,
+        "bbox": [
+          16,
+          0,
+          130,
+          105
+        ]
+      }
+    ],
+    "window": [
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      },
+      {
+        "mean_abs_rgb": 0.0,
+        "pixels_gt_12": 0,
+        "total_pixels": 22100,
+        "bbox": null
+      }
+    ],
+    "remounted": [
+      {
+        "mean_abs_rgb": 0.59532,
+        "pixels_gt_12": 203,
+        "total_pixels": 22100,
+        "bbox": [
+          0,
+          6,
+          126,
+          148
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.01784,
+        "pixels_gt_12": 21,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          46,
+          46
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.1176,
+        "pixels_gt_12": 80,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          47,
+          63
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.54763,
+        "pixels_gt_12": 215,
+        "total_pixels": 22100,
+        "bbox": [
+          38,
+          24,
+          62,
+          132
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.34261,
+        "pixels_gt_12": 182,
+        "total_pixels": 22100,
+        "bbox": [
+          43,
+          32,
+          62,
+          132
+        ]
+      },
+      {
+        "mean_abs_rgb": 0.8413,
+        "pixels_gt_12": 311,
+        "total_pixels": 22100,
+        "bbox": [
+          43,
+          32,
+          98,
+          145
+        ]
+      }
+    ]
+  },
+  "hidden_vs_static": {
+    "mean_abs_rgb": 0.09075,
+    "pixels_gt_12": 652,
+    "total_pixels": 612000,
+    "bbox": [
+      418,
+      393,
+      545,
+      533
+    ]
+  },
+  "failures": [],
+  "verdict": "PASS"
+}

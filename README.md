@@ -162,6 +162,8 @@ document.querySelector('#open-door').onclick = async () => {
 | `setWheelType(index)` | 仅0/1 | 已验证 |
 | `setHeadlights(on)` | boolean大灯开关 | 已验证 |
 | `setDriving(on)` | boolean行驶展示开关 | 已验证 |
+| `setCharging(on)` | 严格boolean；true请求充电，false请求停止 | 构建专用充电展示 |
+| `setChargingCableVisible(visible)` | 严格boolean；独立请求显示/隐藏充电线 | 充电线展示 |
 | `setMirrors(expanded)` | true展开、false折叠；会联动灯光 | 预览 |
 | `setDaytimeRunningLights(on)` | 日行灯 | 预览 |
 | `setPositionLights(on)` | 位置灯 | 预览 |
@@ -182,6 +184,24 @@ await car.setDriving(false);
 ```
 
 `options.animate`为boolean，默认true。门窗使用原始setter和动画，不手工重建速度或下降幅度。
+
+### 充电展示的正式集成
+
+```js
+await car.setCharging(true);
+await car.setChargingCableVisible(true);
+// 停止充电同时隐藏充电线。
+await car.setCharging(false);
+await car.setChargingCableVisible(false);
+```
+
+`setCharging(true)` 请求充电和线缆均为true；`setCharging(false)` 请求两者均为false。充电线显示/隐藏命令会停止充电流动，并将充电请求更新为false、线缆请求更新为传入值；需要流动效果时应先设置充电线，再调用 `setCharging(true)`。两组按钮分别派发方法，不保证引擎状态互不影响。
+
+两个方法只接受原生 `true` / `false`，不接受 `0` / `1`、字符串或其他 truthy/falsy 值；非法参数应拒绝为 `INVALID_ARGUMENT`。业务按钮分别绑定两组开关，不用实验整数接口替代规范方法，也不把充电线可见当作正在充电。控制不自动切换相机；拖动至车辆右后侧观察充电口和充电线，前视角看不到变化不等于调用失败。
+
+`getState().requested` 中的 `charging` 与 `chargingCableVisible` 是分别记录的请求状态（包括规范方法的已知联动），不是Unity真实回读；未请求值不应显示为已观察到的关闭状态。成功返回 `dispatched` 仅表示派发，不能作为充电动画完成或真实车辆充电反馈。
+
+充电构建专用桥按需（lazy）初始化：首次充电控制需等待WASM SHA-256及注册/实例校验，不能省略哈希保护或对未知构建继续调用。异步初始化完成后必须复核实例与生命周期，销毁或换实例后不再派发；失败不应登记为成功请求。HTTP无WebCrypto时保留SHA-256备用校验。首次调用可能较慢，业务应捕获错误并显示等待状态，不能只等 `ready()` 就假定桥已完成校验。
 
 ### 返回值与状态
 

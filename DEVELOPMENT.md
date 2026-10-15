@@ -236,6 +236,16 @@ Module.asm._g.get(slot)(carPtr, doorId, Number(open), Number(animate), 0);
 
 仍需留意：加载完全卡住时destroy可能等待很久；对构建结构变化的所有错误必须保持fail-closed；未来若增加多实例要重新检查原始Unity全局事件和资源共享。
 
+### 12.1 充电展示正式接口与维护约束
+
+对外方法统一为 `setCharging(on)` 与 `setChargingCableVisible(visible)`，仅接收严格boolean，不对数字、字符串等做truthy转换；非法输入拒绝 `INVALID_ARGUMENT`。充电展示与充电线显示使用分别提供的规范方法，按钮不隐式调用另一方法，也不自动切换相机；这不代表底层状态互不影响。setCharging(true)请求充电与线缆均为true，false请求两者均为false；setChargingCableVisible(v)请求充电为false、线缆为v，停止流光并展示或隐藏静态线缆。API测试页提供四个独立按钮，并提示从车辆右后侧观察充电口与充电线，避免用前视角无变化判断功能不存在。
+
+请求状态使用 `requested.charging` 与 `requested.chargingCableVisible`，不是内部动画phase或真实车辆遥测；未请求值不冒充已观察到的关闭。规范返回仍是 `dispatched` / `observed:false`，不证明动画结束。失败不得写成成功请求，重复相同请求仍应保持setter语义；业务直接点击模型产生的变化不保证同步回requested。
+
+充电桥沿用构建专用的fail-closed原则：首次控制lazy加载，先验证WASM SHA-256、原始方法注册与唯一有效实例，再调用原始方法，不改Build、不写堆内存、不跳过门窗门禁。`ready()` 不提前执行或替代按需构建验证。等待初始化后必须复核生命周期及Unity实例身份，销毁、重挂载或失败时不得向旧实例派发。无WebCrypto时仍使用备用SHA-256；首次等待是安全校验成本，不以取消哈希换取低延迟。
+
+协调验收应包含两个方法true/false、独立组合、重复请求、严格boolean拒绝、右后侧画面、坏hash拒绝、首次lazy调用期间destroy及重挂载。本节规定接入与维护契约，不将方法存在、按钮日志或requested值冒充这些运行验收的证据。运行文件变化后由整合方刷新offline-manifest.json的尺寸与SHA-256，再执行发布校验；仅修改文档无需刷新资源清单。
+
 ## 13. 普通HTTP的兼容性
 
 crypto.randomUUID及crypto.subtle通常只在安全上下文提供。localhost测试成功不能证明HTTP IP部署成功。

@@ -2,8 +2,13 @@
   "files": [
     {
       "path": "components/car-player.js",
-      "bytes": 12915,
-      "sha256": "91ce2c168491378e76b0e71f75b80243187101b9347a21d3baa05be4a50c038a"
+      "bytes": 14839,
+      "sha256": "c7bf15d5846dbbba499b3198b6ae074ef8bd2e19a725eef485dfa41340778f7e"
+    },
+    {
+      "path": "components/charging-controls.js",
+      "bytes": 5901,
+      "sha256": "93983d219098b7842a969cec78844870f50ce46386deb3ea8b257a82bc9fc444"
     },
     {
       "path": "components/door-controls.js",
@@ -22,8 +27,8 @@
     },
     {
       "path": "examples/api.html",
-      "bytes": 7184,
-      "sha256": "a05665f405184b73d63d7ca30f7efeb24daa70cffcf2637456c995b1ef494d5c"
+      "bytes": 7948,
+      "sha256": "1390ae8fddc49c739ccf9bafb2a2c031607722641a169dd14865f279ca0755a8"
     },
     {
       "path": "index.html",

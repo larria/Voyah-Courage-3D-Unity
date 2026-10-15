@@ -47,7 +47,7 @@ def export_site(revision, destination):
         target = destination / name
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(content)
-    if not {'examples/api.html', 'components/car-player.js', 'unity-player/Build/ZY.wasm'} <= seen:
+    if not {'examples/api.html', 'components/car-player.js', 'components/charging-controls.js', 'unity-player/Build/ZY.wasm'} <= seen:
         raise ValueError('Manifest is missing required entry files')
     (destination / 'index.html').write_text(ENTRY, encoding='utf-8')
     (destination / '.nojekyll').touch()

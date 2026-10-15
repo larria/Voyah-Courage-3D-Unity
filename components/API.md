@@ -25,6 +25,8 @@ await player.setHeadlights(true);
 - `setInterior(code)`：R旭日红、P深海蓝、Q皓月白。变更真实内饰材质，不强制切换内饰相机。
 - `setHeadlights(boolean)`：原始API.setFrontLight，开关画面变化实测。
 - `setDriving(boolean)`：API.carDrivingStatus，启动/停止画面变化实测；并非真实车辆控制。
+- `setCharging(on)`：严格boolean，true请求充电展示、false请求停止；当前构建专用桥，首次调用按需校验WASM。
+- `setChargingCableVisible(visible)`：严格boolean，true请求显示充电线、false请求隐藏；单独提供控制方法，不改变相机；显示/隐藏线缆会停止充电流动并将充电请求更新为false。
 - `setMirrors(expanded)`：true展开、false折叠；原始值0展开/1折叠，组件已转换。此方法还会影响灯光，非纯镜控制，标为preview。
 - `setDaytimeRunningLights(on)`、`setPositionLights(on)`：已实际观察开关画面变化，preview。
 - `setLocked(locked)`：true锁车/false解锁，原版会联动灯光、镜子，尚未完整检查所有副作用，preview。
@@ -39,6 +41,23 @@ await player.setHeadlights(true);
 控制Promise返回 `{id,method,value,status:'dispatched',observed:false}`，只表示派发。错误为CarPlayerError，含code/message。错误码INVALID_ARGUMENT、INSTANCE_ACTIVE、LOAD_FAILED、TIMEOUT、RUNTIME_ERROR、DESTROYED、UNSUPPORTED、UNSUPPORTED_BUILD。
 
 事件为EventTarget/CustomEvent：progress、ready、error、runtime-log、command、destroyed，数据在event.detail。组件销毁后业务方可释放整个对象及自己添加的监听。
+
+## 充电展示接入契约
+
+```js
+await player.setCharging(true);
+await player.setChargingCableVisible(true);
+await player.setCharging(false); // 停止充电并隐藏充电线
+await player.setChargingCableVisible(false);
+```
+
+`setCharging(true)` 请求charging=true、chargingCableVisible=true；false则请求两者均为false。`setChargingCableVisible(v)` 请求charging=false、chargingCableVisible=v，显示的是静态线缆。
+
+参数只接受原生boolean；数字、字符串、null和省略参数均不是开关值，应拒绝 `INVALID_ARGUMENT`。业务应分别维护充电请求和线缆显示请求，优先调用这两个规范方法，不用 `experimental.invoke` 的原始整数参数替代。
+
+`getState().requested.charging`、`getState().requested.chargingCableVisible` 仅是分别记录的请求值（包含规范方法的已知联动）；线缆显示/隐藏会停止流动并请求charging=false，需要流动时先设置线缆，再调用setCharging(true)。未请求值不应当作已观察到的关闭；`observed:null` 仍表示无真实回读。Promise结果 `dispatched` / `observed:false` 不证明动画完成、线缆实际可见或真实车辆正在充电。按钮不会自动换相机，需拖动至车辆右后侧观察充电口和充电线。
+
+充电桥lazy初始化，首次调用等待WASM SHA-256、原始注册及实例验证，构建不匹配应拒绝 `UNSUPPORTED_BUILD`，不得跳过校验。`ready()` 不代表这次按需验证已完成。初始化await返回后必须重新检查未销毁且仍是同一Unity实例；失败或销毁期间不得派发，也不得登记成功请求。普通HTTP下无WebCrypto仍需备用SHA-256，不能关闭安全门禁。业务需await并捕获错误，避免销毁时晚到命令进入已退出实例。
 
 ## 实验接口（非稳定业务契约）
 `player.experimental.invoke(method,value)`：提供元数据确认的32个API方法名的受校验通道（重载仅保留int版本），签名表见`RUNTIME_METHODS`。仅保证参数类型，数值范围、状态含义、副作用可能未验证；初始化/场景命令可改变车色与相机，getState不能回读实验命令产生的实际状态。
@@ -61,7 +80,7 @@ ID仅支持LF左前/LB左后/RF右前/RB右后。open、animate为boolean，anim
 
 内部动画phase不是0–1比例，本版不作为公共真实状态返回，命令仍只报告dispatched。
 
-本版仍不是全部功能完成：门速/轮转角、完整配置值域及通用真实状态回读未解决。门窗开关可通过verification/door-component-check.py重新执行运行验收。充电线、门把手、后Logo灯在当前前视角无变化，不能宣称生效。setVersion=2有变化但语义未确认，继续留实验接口。
+本版仍不是全部功能完成：门速/轮转角、完整配置值域及通用真实状态回读未解决。门窗开关可通过verification/door-component-check.py重新执行运行验收。此前充电线在前视角无变化的记录不能作为不可用结论；正式充电接口需在右后侧分别观察充电与线缆显示，不据此宣称所有组合已验收。门把手、后Logo灯在当前前视角无变化，不能宣称生效。setVersion=2有变化但语义未确认，继续留实验接口。
 
 ## 验证与接入说明
 

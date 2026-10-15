@@ -72,6 +72,37 @@ verification/                 可重跑验证与精简结果
 
 `offline-manifest.json`列出所有必要运行文件的尺寸与SHA-256。整个页面部署时应保留上述目录结构。首页不依赖verification、开发解析工具或外部网站。
 
+## GitHub 与 GitHub Pages 发布
+
+- 源码：https://github.com/larria/Voyah-Courage-3D-Unity
+- Pages：https://larria.github.io/Voyah-Courage-3D-Unity/
+- Pages 首页跳转到 API 控制台；源码中的展示首页不变。
+
+首次配置远端（已有时无需重复）：
+
+```bash
+git remote add github https://github.com/larria/Voyah-Courage-3D-Unity.git
+```
+
+修改完成并提交后，统一发布：
+
+```bash
+python tools/publish.py --publish
+```
+
+工具将同一源码提交同步到 Gitee `main`、GitHub `main`，再生成并推送 GitHub `gh-pages`。仅使用 Python 标准库与 Git，无 npm 构建、无自建 GitHub Actions 工作流。需要两个平台的 Git 写权限；不会自动提交、强推或切换当前分支。每个目标推送后核对 SHA；跨平台不能原子更新，失败时已成功目标保留，使用 `--revision <源码SHA> --publish` 重试同一版本。
+
+首次推送后，在 GitHub **Settings → Pages** 选择 **Deploy from a branch → gh-pages → / (root)**，点击 Save，等待平台部署。不要选 GitHub Actions。分支推送成功不等于网站已上线，首次必须完成此配置。
+
+可导出已提交版本预览（目录必须在项目内且尚不存在）：
+
+```bash
+python tools/publish.py --preview .publish/preview/Voyah-Courage-3D-Unity
+python -m http.server 18744 --directory .publish/preview
+```
+
+访问 `http://127.0.0.1:18744/Voyah-Courage-3D-Unity/` 验证子路径加载及门窗操作。工具从提交读取并校验所有清单资源，仅在派生站点替换首页、加入 `.nojekyll` 和 `source-revision.json`；原始 Build 不变。部署入口与源码首页不同，因此站点不附带失真的源码 manifest。
+
 ## 组件集成
 
 容器必须有明确高度。资源默认相对于组件模块URL解析；更换部署结构时显式设置 `assetBaseUrl`。

@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>ZG</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      user-select: none;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: transparent !important;
+    }
+
+    #unity-canvas {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: transparent !important;
+    }
+
+    #unity-warning {
+      position: absolute;
+      left: 50%;
+      top: 5%;
+      transform: translate(-50%);
+      background: #FF0;
+      padding: 10px;
+      display: none
+    }
+  </style>
+  <!-- <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script> -->
+  <!-- <script src="src/console-log-viewer.js?closed=true"></script>  -->
+  <style>
+    #controller {
+      position: absolute;
+      bottom: 2px;
+      width: 100%;
+      height: max-content;
+    }
+
+    .section {
+      width: 100%;
+    }
+
+    #controller button {
+      width: 8vw;
+      height: 8vw;
+      margin: 0.3vw;
+      float: left;
+      border-width: 1px;
+      background-color: white;
+      overflow-wrap: anywhere;
+    }
+
+    #controller h3 {
+      color: rgb(81, 81, 81);
+      font-weight: normal;
+    }
+
+    #controller button.active {
+      background-color: greenyellow;
+    }
+
+    #controller span {
+      margin: 0vw 2vw;
+      float: left;
+      display: block;
+      width: 10px;
+      height: 1px;
+    }
+
+    #controller section {
+      height: 0;
+      overflow: hidden;
+      clear: both;
+      margin: 0;
+      position: relative;
+      top: 1vw;
+      opacity: 0;
+      transition: opacity 0.5s ease, top 0.5s ease;
+    }
+
+    #controller section.show {
+      height: auto;
+      overflow: auto;
+      margin: 1vw 2vw 0 2vw;
+      opacity: 1;
+      top: 0vw;
+    }
+
+    #statistics {
+      font-size: small;
+      position: absolute;
+      z-index: 1;
+      color: #FFF;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="unity-canvas" style="opacity: 0;"></canvas>
+  <div id="unity-warning"> </div>
+  <script src="src/$.js"></script>
+
+  <script>
+    var canvas = document.querySelector("#unity-canvas");
+    var warningBanner = document.querySelector("#unity-warning");
+
+    function unityShowBanner(msg, type) {
+      function updateBannerVisibility() {
+        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+      }
+      var div = document.createElement('div');
+      div.innerHTML = msg;
+      warningBanner.appendChild(div);
+      if (type == 'error') div.style = 'background: red; padding: 10px;';
+      else {
+        if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+        setTimeout(function () {
+          warningBanner.removeChild(div);
+          updateBannerVisibility();
+        }, 5000);
+      }
+      updateBannerVisibility();
+    }
+
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/ZY.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/ZY.data",
+      frameworkUrl: buildUrl + "/ZY.framework.js",
+      codeUrl: buildUrl + "/ZY.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+      companyName: "EAST",
+      productName: "ZG",
+      productVersion: "0.1",
+      showBanner: unityShowBanner,
+    };
+
+    if (window.FX_WEBPACK_DYNAMIC_PUBLIC_PATH) {
+      for (const key in config) {
+        if (key.endsWith('Url')) {
+          config[key] = window.FX_WEBPACK_DYNAMIC_PUBLIC_PATH + "/" + config[key]
+        }
+      }
+    }
+
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      var meta = document.createElement('meta');
+      meta.name = 'viewport';
+      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      document.getElementsByTagName('head')[0].appendChild(meta);
+    }
+    
+
+
+    var opacityTime;
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        // 发送加载进度消息
+        sendLoad3DProgress(progress);
+      }).then((instance) => {
+        unityInstance = instance;
+        // 发送加载完成消息
+        sendLoad3DComplete();
+        // 延迟显示画布
+        clearTimeout(opacityTime)
+        opacityTime = setTimeout(() => {
+          // 获取地址栏的featureCodes参数。然后发送给unity
+          var featureCodes = getFeatureCodes('featureCodes');
+          if (featureCodes) {
+            sendFeatureCodesToUnity(featureCodes);
+          }
+          canvas.style.opacity = "1"
+        }, 200)
+
+      }).catch((message) => {
+        alert(message);
+      });
+    };
+    document.body.appendChild(script);
+
+   // 统一的处理函数
+   function handleDyglVoyah(type, msg) {
+      if (window.unityInstance) {
+        if (msg !== undefined) {
+          if (type == "carStatusPackage") {
+            if (Array.isArray(msg)) {
+              msg.forEach((item) => {
+                unityInstance.SendMessage('API', 'carStatusPackage', item);
+              });
+            } else {
+              console.error('Expected msg to be an array for carStatusPackage');
+            }
+          } else {
+            unityInstance.SendMessage('API', type, msg);
+          }
+        } else {
+          unityInstance.SendMessage('API', type);
+        }
+      }
+    }
+
+
+    // 创建 dyglVoyah 函数，同时支持属性方法调用（用于鸿蒙）
+    window.dyglVoyah = function (type, msg) {
+      handleDyglVoyah(type, msg);
+    };
+
+    // 使用 Proxy 支持动态属性方法调用，如 window.dyglVoyah.carStatusPackage(1)
+    window.dyglVoyah = new Proxy(window.dyglVoyah, {
+      get: function(target, prop) {
+        // 如果访问的是函数自身的属性（如 length, name 等），直接返回
+        if (prop in target || typeof prop === 'symbol') {
+          return target[prop];
+        }
+        // 否则返回一个函数，该函数接收 msg 参数，并将 prop 作为 type
+        return function(msg) {
+          handleDyglVoyah(prop, msg);
+        };
+      }
+    });
+
+
+
+    
+    // 监听来自原生的postMessage事件，并转发给dyglVoyah
+    window.addEventListener('message', function (event) {
+      // 兼容原生通过注入JS发送数据的场景
+      if (event && event.data && typeof event.data === "object" && event.data.type) {
+        // type和msg字段为必需
+        if (window.dyglVoyah) {
+          window.dyglVoyah(event.data.type, event.data.msg);
+        }
+      }
+    }, false);
+
+    window.addEventListener('resize', function () {
+      canvas.style.opacity = "0"
+
+      clearTimeout(opacityTime)
+      opacityTime = setTimeout(() => {
+        canvas.style.opacity = "1"
+      }, 100)
+    });
+
+
+    
+    // 获取地址栏的featureCodes参数。然后发送给unity
+    function getFeatureCodes(val) {
+      var urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(val);
+    }
+
+    function sendFeatureCodesToUnity(featureCodes) {
+      // 识别到featureCodes参数后，发送给unity
+      console.log("featureCodesUrl", featureCodes);
+      if (window.unityInstance) {
+        unityInstance.SendMessage('API', 'featureCodesUrl', featureCodes);
+      }
+    }
+
+
+
+
+
+    var isLoaded = false; // 用于标记是否已加载完成
+
+    // 发送加载进度消息
+    function sendLoad3DProgress(progress) {
+      // 向父窗口发送消息
+      window.parent.postMessage({ type: "dyglLoading", msg: "progress", progress: progress }, "*");
+      // iOS WebKit 消息处理
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.load3DProgress) {
+        window.webkit.messageHandlers.load3DProgress.postMessage({ progress: progress });
+      }
+
+      // Android 消息处理
+      if (window.android && window.android.load3DProgress) {
+        window.android.load3DProgress(progress);
+      }
+
+      // 鸿蒙系统消息处理（通过 NativeBridge）
+      if (window.NativeBridge && window.NativeBridge.load3DProgress) {
+        window.NativeBridge.load3DProgress(progress);
+      }
+      // 鸿蒙系统备用方案（通过 ohos 对象）
+      if (window.ohos && window.ohos.load3DProgress) {
+        window.ohos.load3DProgress(progress);
+      }
+    }
+
+    // 发送加载完成消息
+    function sendLoad3DComplete() {
+      if (isLoaded) return; // 防止重复发送
+      // 向父窗口发送消息
+      window.parent.postMessage({ type: "dyglLoading", msg: "done" }, "*");
+
+      // iOS WebKit 消息处理
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.load3DComplete) {
+        window.webkit.messageHandlers.load3DComplete.postMessage({});
+      }
+
+      // Android 消息处理
+      if (window.android && window.android.load3DComplete) {
+        window.android.load3DComplete();
+      }
+
+      // 鸿蒙系统消息处理（通过 NativeBridge）
+      if (window.NativeBridge && window.NativeBridge.load3DComplete) {
+        window.NativeBridge.load3DComplete();
+      }
+      // 鸿蒙系统备用方案（通过 ohos 对象）
+      if (window.ohos && window.ohos.load3DComplete) {
+        window.ohos.load3DComplete();
+      }
+      isLoaded = true;
+    }
+
+    window.carDrivingOutDone = function () {
+      console.log("carDrivingOutDone");
+      sendCarDrivingOutDone();
+    }
+
+
+    // 发送加载完成消息
+    function sendCarDrivingOutDone() {
+      // 向父窗口发送消息
+      window.parent.postMessage({ type: "dyglLoading", msg: "done" }, "*");
+
+      // iOS WebKit 消息处理
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.carDrivingOutDone) {
+        window.webkit.messageHandlers.carDrivingOutDone.postMessage({});
+      }
+
+      // Android 消息处理
+      if (window.android && window.android.carDrivingOutDone) {
+        window.android.carDrivingOutDone();
+      }
+
+      // 鸿蒙系统消息处理（通过 NativeBridge）
+      if (window.NativeBridge && window.NativeBridge.carDrivingOutDone) {
+        window.NativeBridge.carDrivingOutDone();
+      }
+      // 鸿蒙系统备用方案（通过 ohos 对象）
+      if (window.ohos && window.ohos.carDrivingOutDone) {
+        window.ohos.carDrivingOutDone();
+      }
+    }
+
+
+    
+
+    // 统一的点击处理函数
+    function handleTap() {
+    //   console.log("clicked事件")
+      if(window.webkit){
+        // alert("IOS的window.webkit.messageHandlers是否存在: " + (!!window.webkit.messageHandlers));
+        window.webkit.messageHandlers.didTapWebView.postMessage('clicked');
+        // alert("IOS的clicked已发送")
+      }
+
+      if (window.android) {
+        window.android.didTapWebView('clicked');
+      }
+
+      // 鸿蒙系统消息处理（通过 NativeBridge）
+      if (window.NativeBridge) {
+        window.NativeBridge.didTapWebView('clicked');
+      }
+      // 鸿蒙系统备用方案（通过 ohos 对象）
+      if (window.ohos) {
+        window.ohos.didTapWebView('clicked');
+      }
+    }
+
+    // PC端使用 click 事件
+    // document.body.addEventListener('click', handleTap);
+    // 在canvas上也添加click事件（Unity canvas会拦截事件，不会冒泡到body）
+    // canvas.addEventListener('click', handleTap);
+
+    var MAX_MOVE_DISTANCE = 10; // 最大移动距离（像素），超过此距离认为是滑动
+    var MAX_TAP_TIME = 300; // 最大点击时间（毫秒），超过此时间认为是长按
+
+
+    // 在canvas上也添加触摸事件（Unity canvas会拦截事件，不会冒泡到body）
+    var canvasTouchStartData = {
+      x: 0,
+      y: 0,
+      time: 0
+    };
+
+    canvas.addEventListener('touchstart', function(e) {
+      var touch = e.touches[0];
+      canvasTouchStartData.x = touch.clientX;
+      canvasTouchStartData.y = touch.clientY;
+      canvasTouchStartData.time = Date.now();
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', function(e) {
+      if (!canvasTouchStartData.time) return;
+      
+      var touch = e.changedTouches[0];
+      var moveX = Math.abs(touch.clientX - canvasTouchStartData.x);
+      var moveY = Math.abs(touch.clientY - canvasTouchStartData.y);
+      var moveDistance = Math.sqrt(moveX * moveX + moveY * moveY);
+      var timeDiff = Date.now() - canvasTouchStartData.time;
+
+      // 只有移动距离小且时间短才认为是点击
+      if (moveDistance <= MAX_MOVE_DISTANCE && timeDiff <= MAX_TAP_TIME) {
+        handleTap();
+      }
+      
+      // 重置数据
+      canvasTouchStartData.time = 0;
+    }, { passive: true });
+
+
+
+  </script>
+</body>
+
+</html>

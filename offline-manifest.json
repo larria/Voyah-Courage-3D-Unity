@@ -2,8 +2,8 @@
   "files": [
     {
       "path": "components/car-player.js",
-      "bytes": 15482,
-      "sha256": "a88f42cb5ad695a3f8724fd2c4c5214aa02d53530f9128f57d14e67547a990d7"
+      "bytes": 17558,
+      "sha256": "4964b9d77d2cf8c7817ca02244abe833df966e9e424305b29e3575b0ad2a29b9"
     },
     {
       "path": "components/charging-controls.js",
@@ -14,6 +14,11 @@
       "path": "components/door-controls.js",
       "bytes": 5622,
       "sha256": "68d083a3c02bf575a6ae320bb5c60b82e9dc0b87b36986fed7bce0756baf1b2e"
+    },
+    {
+      "path": "components/mirror-controls.js",
+      "bytes": 9223,
+      "sha256": "aaae818c42457d7a40f6652e58a2dd5790215e0955b3172a3a3bb1191c2eb89d"
     },
     {
       "path": "components/runtime-controls.js",
@@ -27,18 +32,18 @@
     },
     {
       "path": "examples/api.html",
-      "bytes": 8135,
-      "sha256": "e05c687393919f24631d84e7e9da7b3d7b91a08a8531210167e1c32755195a84"
+      "bytes": 8365,
+      "sha256": "afd82b01fde81521f2d57b4b00211bfdf456689f9058625a41469eb54f565014"
     },
     {
       "path": "index.html",
-      "bytes": 2681,
-      "sha256": "47a31e35af30b2b8a507600b5ad84462109dabe3d1f8aa519ca766a6e8ffa7a0"
+      "bytes": 4727,
+      "sha256": "4bc9887057c20796556a8ec1f80ece21558420bb140c58295b1024c07350b401"
     },
     {
       "path": "tools/direct-player.js",
-      "bytes": 1622,
-      "sha256": "70ba497f7e86532e54c92a1a81b063993c935a8f92f62451e74373942c6564a5"
+      "bytes": 9290,
+      "sha256": "e0b8c22153d7a3026223013da2f47efe2ed7fa2da78912cea2cf3b5a5e1fac8e"
     },
     {
       "path": "tools/serve.py",
@@ -74,6 +79,11 @@
       "path": "unity-player/src/$.js",
       "bytes": 5521,
       "sha256": "2e6e3238caa50146953e0e7ad6b4352336b4113481fb1a00c6593f2fdfcdc831"
+    },
+    {
+      "path": "tools/showroom.css",
+      "bytes": 8392,
+      "sha256": "cef556ed12a1d912fefed1bd5ecca39c70a7da93e4d56c489f40846f8f79d406"
     }
   ]
 }

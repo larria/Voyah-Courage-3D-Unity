@@ -1,0 +1,389 @@
+{
+  "scope": "uncommitted lock semantic fix, 0 commits",
+  "frames": [
+    {
+      "name": "camera",
+      "event": {
+        "command": {
+          "id": 1,
+          "method": "carCameraperspective",
+          "value": 0,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "locked-1",
+      "event": {
+        "command": {
+          "id": 2,
+          "method": "carLockStatus",
+          "value": 0,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": true
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "unlocked",
+      "event": {
+        "command": {
+          "id": 3,
+          "method": "carLockStatus",
+          "value": 1,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": false
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "locked-2",
+      "event": {
+        "command": {
+          "id": 4,
+          "method": "carLockStatus",
+          "value": 0,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": true
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "mirrors-expanded",
+      "event": {
+        "command": {
+          "id": 5,
+          "method": "setRearview",
+          "value": 0,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": true,
+            "mirrorsFolded": 0
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "mirrors-folded",
+      "event": {
+        "command": {
+          "id": 6,
+          "method": "setRearview",
+          "value": 1,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": true,
+            "mirrorsFolded": 1
+          },
+          "observed": null
+        }
+      }
+    },
+    {
+      "name": "mirrors-expanded-2",
+      "event": {
+        "command": {
+          "id": 7,
+          "method": "setRearview",
+          "value": 0,
+          "status": "dispatched",
+          "observed": false
+        },
+        "state": {
+          "lifecycle": "ready",
+          "requested": {
+            "paint": "QGJ",
+            "interior": "R",
+            "camera": 0,
+            "locked": true,
+            "mirrorsFolded": 0
+          },
+          "observed": null
+        }
+      }
+    }
+  ],
+  "errors": [],
+  "failures": [],
+  "build_before": {
+    "ZY.loader.js": "eb748f3a4b8ac374ad9f8a1d2e380199e25bdbc1e18b340eb152358b8376c35c",
+    "ZY.framework.js": "57840f2772f79a384d174c758005bd879095f61ddd477b9de1f13444076ffed0",
+    "ZY.wasm": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba",
+    "ZY.data": "6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f"
+  },
+  "invalid": {
+    "out": [
+      {
+        "method": "setLocked",
+        "value": "0",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "1",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "true",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "null",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "undefined",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "[object Object]",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setLocked",
+        "value": "",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "0",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "1",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "true",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "null",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "undefined",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "[object Object]",
+        "code": "INVALID_ARGUMENT"
+      },
+      {
+        "method": "setMirrors",
+        "value": "",
+        "code": "INVALID_ARGUMENT"
+      }
+    ],
+    "commands": 0
+  },
+  "events": [
+    {
+      "command": {
+        "id": 1,
+        "method": "carCameraperspective",
+        "value": 0,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 2,
+        "method": "carLockStatus",
+        "value": 0,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": true
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 3,
+        "method": "carLockStatus",
+        "value": 1,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": false
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 4,
+        "method": "carLockStatus",
+        "value": 0,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": true
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 5,
+        "method": "setRearview",
+        "value": 0,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": true,
+          "mirrorsFolded": 0
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 6,
+        "method": "setRearview",
+        "value": 1,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": true,
+          "mirrorsFolded": 1
+        },
+        "observed": null
+      }
+    },
+    {
+      "command": {
+        "id": 7,
+        "method": "setRearview",
+        "value": 0,
+        "status": "dispatched",
+        "observed": false
+      },
+      "state": {
+        "lifecycle": "ready",
+        "requested": {
+          "paint": "QGJ",
+          "interior": "R",
+          "camera": 0,
+          "locked": true,
+          "mirrorsFolded": 0
+        },
+        "observed": null
+      }
+    }
+  ],
+  "server_stopped": true,
+  "build_after": {
+    "ZY.loader.js": "eb748f3a4b8ac374ad9f8a1d2e380199e25bdbc1e18b340eb152358b8376c35c",
+    "ZY.framework.js": "57840f2772f79a384d174c758005bd879095f61ddd477b9de1f13444076ffed0",
+    "ZY.wasm": "e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba",
+    "ZY.data": "6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f"
+  },
+  "build_unchanged": true
+}

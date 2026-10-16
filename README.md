@@ -78,7 +78,7 @@ verification/                 可重跑验证与精简结果
 
 - 源码：https://github.com/larria/Voyah-Courage-3D-Unity
 - Pages：https://larria.github.io/Voyah-Courage-3D-Unity/
-- Pages 首页跳转到 API 控制台；源码中的展示首页不变。
+- Pages 保留清单中的展示首页；API 控制台位于 `examples/api.html`，不覆盖首页或添加跳转。
 
 首次配置远端（已有时无需重复）：
 
@@ -89,21 +89,21 @@ git remote add github https://github.com/larria/Voyah-Courage-3D-Unity.git
 修改完成并提交后，统一发布：
 
 ```bash
-python tools/publish.py --publish
+npm run publish
 ```
 
-工具将同一源码提交同步到 Gitee `main`、GitHub `main`，再生成并推送 GitHub `gh-pages`。仅使用 Python 标准库与 Git，无 npm 构建、无自建 GitHub Actions 工作流。需要两个平台的 Git 写权限；不会自动提交、强推或切换当前分支。每个目标推送后核对 SHA；跨平台不能原子更新，失败时已成功目标保留，使用 `--revision <源码SHA> --publish` 重试同一版本。
+工具默认将同一源码提交同步到 Gitee `main`、GitHub `main`，再生成并推送 GitHub `gh-pages`。需要 Node.js 18+、npm 与 Git；实现仅使用 Node 原生模块，无第三方依赖，无需 npm install、无 npm 构建、无自建 GitHub Actions 工作流。需要两个平台的 Git 写权限；不会自动提交、强推或切换当前分支。发布前检查干净工作区、拉取与推送远端 URL、源码祖先关系以及清单尺寸/SHA-256，清单必须包含后视镜桥。派生站点使用隔离 Git index，以原 gh-pages 提交为父提交，同树复用；失败清理临时导出。每个目标推送后核对 SHA；跨平台不能原子更新，失败时已成功目标保留，使用 `npm run publish -- --revision <源码SHA>` 重试同一版本。
 
 首次推送后，在 GitHub **Settings → Pages** 选择 **Deploy from a branch → gh-pages → / (root)**，点击 Save，等待平台部署。不要选 GitHub Actions。分支推送成功不等于网站已上线，首次必须完成此配置。
 
 可导出已提交版本预览（目录必须在项目内且尚不存在）：
 
 ```bash
-python tools/publish.py --preview .publish/preview/Voyah-Courage-3D-Unity
+npm run publish -- --preview .publish/preview/Voyah-Courage-3D-Unity
 python -m http.server 18744 --directory .publish/preview
 ```
 
-访问 `http://127.0.0.1:18744/Voyah-Courage-3D-Unity/` 验证子路径加载及门窗操作。工具从提交读取并校验所有清单资源，仅在派生站点替换首页、加入 `.nojekyll` 和 `source-revision.json`；原始 Build 不变。部署入口与源码首页不同，因此站点不附带失真的源码 manifest。
+访问 `http://127.0.0.1:18744/Voyah-Courage-3D-Unity/` 验证子路径加载及门窗操作。预览可与 `--revision <源码SHA>` 组合，仅读取已提交内容，不要求工作区干净、不访问远端也不推送；失败会清理本次创建的导出目录。工具以 Buffer 读取并校验所有清单资源，保留首页、原始 Build 和原 `offline-manifest.json`，另加入 `.nojekyll` 和 `source-revision.json`。
 
 ## 组件集成
 
@@ -169,13 +169,19 @@ document.querySelector('#open-door').onclick = async () => {
 | `setMirrors(expanded)` | true展开、false折叠；会联动灯光 | 预览 |
 | `setDaytimeRunningLights(on)` | 日行灯 | 预览 |
 | `setPositionLights(on)` | 位置灯 | 预览 |
-| `setLocked(locked)` | 锁车展示，可能联动镜子/灯光 | 预览 |
+| `setLocked(locked)` | 严格boolean；true锁车→原始值0，false解锁→1；联动镜子/灯光 | 预览 |
 | `flashTurnSignals()` | 原始闪烁效果 | 预览 |
 | `findCar()` | 原始寻车效果 | 预览 |
 | `setCameraPreset(index)` | 0/1/2；不保证预设业务名称 | 预览 |
 | `getState()` | 生命周期与已请求配置 | 无通用真实状态回读 |
 | `getCapabilities()` | 已验证/预览/实验/不可用清单 | 能力查询 |
 | `destroy()` | Promise，幂等销毁 | 生命周期 |
+
+锁车映射已修正；`requested.locked`保留boolean，command事件记录原始0/1，非法非boolean输入拒绝且不派发命令。`verification/lock-*`保留此前按钮操作与画面证据。后视镜修正采用route1原生暂停步进方案，由构建专用`components/mirror-controls.js`接入公开方法：`setMirrors(true)`展开、`setMirrors(false)`折叠；`setLocked(true)`保留原始`carLockStatus(0)`锁车及灯光联动并请求折叠，false保留原始值1解锁及灯光联动并请求展开。测试页按钮直接调用这些公开方法，无需另设补丁按钮；原始实验命令不包含此修正。
+
+方案校验当前Build的WASM与data SHA-256、原始方法注册、实例类型及唯一Main关联，构建不匹配不得绕过门禁。保留原始3秒smoothstep、原生deltaTime/Update，反向命令从当前phase继续；pre hook保留并调用此前hook，仅将原镜动画以原生pause(1)暂停，防止错误Y轴的原生回调覆盖修正方向。不直接写heap或函数table，不改carType或原始Build，不使用RAF另建动画循环。
+
+真实组件验收见`.publish/mirror-fix-probe/formal-mirror-results.json`、`formal-continuous-results.json`及连续截图：现有按钮展开/折叠、锁车/解锁、快速反向/重复通过，171次采样的原phase与smoothstep最大偏差5.44e-8。`formal-failure-results.json`记录Build mismatch拒绝与异步destroy，连续结果记录销毁不覆盖第三方较新hook。镜桥初始化后的门窗/充电/内饰回归、HTTP无subtle且保留getRandomValues已真实运行，四个Build hash未变；完整断网离线、所有第三方hook组合与全部实验副作用未验收。Promise与command的`dispatched`只表示命令派发，不表示物理动作完成；requested不是Unity真实状态回读，帧内失败停止修正并使后续调用拒绝。
 
 ```js
 await car.setDoor('LF', true);

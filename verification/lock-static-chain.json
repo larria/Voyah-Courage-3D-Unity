@@ -1,0 +1,22 @@
+{
+  "Configurator.API.setRearview[{'name': 'v', 'type': 'System.Int32'}]": {
+    "slot": 26405,
+    "function": 30833,
+    "body": "local.get 0\nlocal.get 1\ni32.const 0\ni32.gt_s \nlocal.get 1\ncall 9527\nend "
+  },
+  "Configurator.API.setRearview[{'name': 'v', 'type': 'System.Boolean'}]": {
+    "slot": 26406,
+    "function": 9527,
+    "body": "local.get 0\ni32.load align 2 offset 16\ni32.load align 2 offset 52\nlocal.get 1\ni32.const 1\nlocal.get 0\ncall 15541\nend "
+  },
+  "Configurator.API.carLockStatus[{'name': 'v', 'type': 'System.Int32'}]": {
+    "slot": 26421,
+    "function": 30828,
+    "body": "local.get 1\nlocal.get 0\ni32.load align 2 offset 20\ni32.ne \nif -64\nlocal.get 0\nlocal.get 1\ni32.store align 2 offset 20\nlocal.get 0\nlocal.get 1\ni32.const 1\ni32.ne \nlocal.get 0\ncall 9527\nend \nend "
+  },
+  "Configurator.CarConfigurator.setRearview[{'name': 'v', 'type': 'System.Boolean'}, {'name': 'isAnim', 'type': 'UnresolvedTypeIndex:4431'}]": {
+    "slot": 26465,
+    "function": 15541,
+    "body": "local.get 0\ni32.load align 2 offset 284\nlocal.get 1\nlocal.get 2\nlocal.get 0\ncall 3279\nblock -64\nlocal.get 1\nif -64\nlocal.get 0\ni32.load align 2 offset 276\nlocal.get 0\ncall 5425\nlocal.get 0\nlocal.get 0\ncall 5421\nbr 1\nend \nlocal.get 0\ni32.load align 2 offset 272\nlocal.get 0\ncall 5425\nlocal.get 0\ni32.load align 2 offset 16\ni32.eqz \nif -64\nlocal.get 0\ni32.const 0\nlocal.get 0\ncall 4455\nbr 1\nend \nlocal.get 0\nlocal.get 0\ncall 5421\nend \nlocal.get 0\nlocal.get 1\ni32.const 1\n0x73 \nlocal.tee 1\nlocal.get 0\ncall 4454\nlocal.get 0\nlocal.get 1\nlocal.get 0\ncall 4453\nend "
+  }
+}

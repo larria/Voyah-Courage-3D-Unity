@@ -312,4 +312,20 @@ verification/log-check.py实际驱动加载、内饰三色及门控制，捕获c
 
 门速/轮转角、完整版本与选装值域、通用状态回读仍未公开。部分后视镜/锁车/灯光方法联动其他状态；相机预设仅验证编号而未给业务名称。部分资源相关候选在当前视角无变化，不宣称已生效。
 
+锁车映射已修正为严格boolean的true→原始carLockStatus(0)、false→1；requested.locked保持boolean，command事件携带原始0/1，非法输入拒绝且不派发。verification/lock-mirror-check.py、lock-mirror-results.json及lock-*.png记录真实API页按钮、往返画面、事件与非法输入证据；静态链lock-static-chain.json辅助解释原始映射，不代替画面验收。此前证据中的原版折叠向外上翻问题由route1原生暂停步进方案处理，组件接入模块为components/mirror-controls.js；项目未发现Unity源工程Assets/ProjectSettings，不修改原始Build。
+
+### 后视镜route1定位与验证边界
+
+- 公开setMirrors(true)展开、false折叠（原始0/1）；setLocked(true)保留carLockStatus(0)锁车和灯光联动并请求折叠，false保留1解锁和灯光联动并请求展开。现有API页按钮直接调用公开方法，模块集成后自动使用修正路径；experimental.invoke原始实验命令不做此修正。
+- 门禁绑定当前Build的WASM SHA-256 `e332b42051b117e0492744084cd5065ba6fd7d38b0178876bed500106ada35ba` 与data SHA-256 `6d7394f4410750ee80f7fdb6e8049c71c484ad9c23367f09e8cb95f4db261d6f`，并校验原始方法注册、AnimEx/Transform等实例类型及唯一Main关联；不能硬套指针或跳过校验。
+- 保留原始3秒smoothstep、原生deltaTime与Update步进；反向命令从当前phase继续而非重置端点。pre hook保留并调用此前hook，仅对原镜动画使用原生pause(1)，防止错误Y轴原生回调在随后Update覆盖修正方向。不直接写heap或函数table，不修改carType，不改Build，不使用RAF另建动画循环。
+- 临时`runtime-native-step-results.json`/`runtime-native-lock-results.json`先证明原生暂停步进；正式证据在同目录`formal-mirror-results.json`、`formal-continuous-results.json`，171采样的value与smoothstep(phase/3)最大偏差5.44e-8，公开按钮、快速反向、重复、锁联动通过。`formal-failure-results.json`验证Build mismatch拒绝及异步destroy；较新的hook保留。`formal-regression.py`及`interior-mode-results.json`记录镜桥初始化后门窗/充电/内饰与无subtle HTTP回归、getRandomValues保留。四个Build hash不变。首次按钮验收曾因标签变化超时，修正选择器后重跑通过；code-review技能审批超时，改为手动差异审查，补上每帧图关系复核。完整断网离线和任意第三方hook组合未覆盖。
+- Promise和command只报告dispatched，动画3秒是原生完整行程时长，不保证命令返回即物理动作完成；requested与内部phase不是通用真实状态回读。
+
+## 18. 展示首页与发布
+
+index.html是正式展示入口，tools/direct-player.js复用CarPlayer，tools/showroom.css负责响应式布局。桌面侧面板、移动底部独立滚动面板；隐藏UI会扩展模型舞台，原生全屏独立控制。progress仅为引擎资源加载比例，100%后仍等ready完成初始化；错误重试先await destroy，保证单实例。控件选择仅表示请求值，尾门仅发送切换命令。
+
+verification/showroom-check.py通过真实页面按钮验证配色、座舱、门窗、尾门、灯、镜/锁与充电，捕获桌面、移动、加载、沉浸及失败恢复画面；输出位于.publish/showroom-verification。加载器请求失败后解除拦截并点击重试，恢复ready且只剩一个canvas；无页面异常、窄屏无横向溢出。发布使用npm run publish，Node从已提交manifest导出真实首页，不覆盖为跳转页。API控制台仍独立保留。
+
 资源及品牌权利归相应权利人。逆向与技术复现记录不授予商业或再分发授权，使用范围应另行确认。

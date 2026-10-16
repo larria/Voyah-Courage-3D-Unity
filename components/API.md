@@ -33,7 +33,7 @@ API 页提供“进入内饰”和“返回外观”两个按钮，颜色按钮�
 - `setChargingCableVisible(visible)`：严格boolean，true请求显示充电线、false请求隐藏；单独提供控制方法，不改变相机；显示/隐藏线缆会停止充电流动并将充电请求更新为false。
 - `setMirrors(expanded)`：true展开、false折叠；原始值0展开/1折叠，组件已转换。此方法还会影响灯光，非纯镜控制，标为preview。
 - `setDaytimeRunningLights(on)`、`setPositionLights(on)`：已实际观察开关画面变化，preview。
-- `setLocked(locked)`：true锁车/false解锁，原版会联动灯光、镜子，尚未完整检查所有副作用，preview。
+- `setLocked(locked)`：严格boolean；已修正为true锁车→`carLockStatus(0)`、false解锁→`carLockStatus(1)`。`requested.locked`保留boolean，command事件记录原始0/1；非boolean输入以INVALID_ARGUMENT拒绝且不派发命令。保留原版灯光联动，并通过构建专用镜控制请求锁车折叠、解锁展开；尚未完整检查所有副作用，preview。`verification/lock-*`含此前真实按钮、事件及非法输入证据；route1修正及验收边界见下节，不改原始Build。
 - `setWheelType(index)`：仅支持0/1，两种轮毂已验证切换及恢复。原版index=2触发异常，组件拒绝。
 - `toggleTrunk()`：原始根对象/ZY无参方法，实际验证打开和关闭；不提供幂等状态设置。
 - `flashTurnSignals()`、`findCar()`：原始无参方法，已观察画面变化但闪烁次数和完整动画尚未验收，preview。
@@ -42,9 +42,17 @@ API 页提供“进入内饰”和“返回外观”两个按钮，颜色按钮�
 - `getState()`：lifecycle + requested + observed:null。requested仅为命令请求，不冒充Unity真实回读。
 - `destroy(): Promise<void>`：幂等，Quit并释放canvas和实例锁。加载中销毁要等待后台加载结束，不保证立即完成。
 
-控制Promise返回 `{id,method,value,status:'dispatched',observed:false}`，只表示派发。错误为CarPlayerError，含code/message。错误码INVALID_ARGUMENT、INSTANCE_ACTIVE、LOAD_FAILED、TIMEOUT、RUNTIME_ERROR、DESTROYED、UNSUPPORTED、UNSUPPORTED_BUILD。
+控制Promise返回 `{id,method,value,status:'dispatched',observed:false}`，只表示派发。错误为CarPlayerError，含code/message。错误码INVALID_ARGUMENT、INSTANCE_ACTIVE、LOAD_FAILED、TIMEOUT、RUNTIME_ERROR、DESTROYED、UNSUPPORTED、UNSUPPORTED_BUILD、MIRROR_CONTROL_FAILED。
 
 事件为EventTarget/CustomEvent：progress、ready、error、runtime-log、command、destroyed，数据在event.detail。组件销毁后业务方可释放整个对象及自己添加的监听。
+
+## 后视镜与锁车修正接入契约
+
+`setMirrors(true)`请求展开（原始值0），false请求折叠（原始值1）；`setLocked(true)`仍派发原始`carLockStatus(0)`，false仍派发1，保留灯光联动并分别请求折叠/展开。API测试页“后视镜开（展开）/关（折叠）”与“锁车/解锁”按钮直接调用公开方法，随`components/mirror-controls.js`集成使用修正路径；`experimental.invoke`仍是原始实验命令，不提供修正保证。
+
+route1使用原生暂停步进：按当前Build的WASM与data SHA-256、方法注册、实例类型和唯一Main关联设置门禁；不匹配拒绝`UNSUPPORTED_BUILD`，不跳过校验。保留原始3秒smoothstep与原生deltaTime/Update，反向请求从当前phase继续。pre hook保留并调用已有hook，仅对原镜动画调用原生pause(1)，阻止错误Y轴原生回调在Update中覆盖修正方向。无直接heap/table写入，不修改carType或Build，不用RAF重建时钟。
+
+真实组件按钮与连续帧证据在`.publish/mirror-fix-probe/formal-mirror-results.json`、`formal-continuous-results.json`（171次采样，快速反向/重复，原phase与smoothstep最大偏差5.44e-8）。`formal-failure-results.json`记录Build mismatch拒绝、异步destroy无hook残留；较新的hook在destroy后保留。`formal-regression.py`的结果与截图记录镜桥初始化后门窗、充电、内饰回归及HTTP无subtle仍保留getRandomValues。四个Build hash不变。完整离线断网、任意第三方hook组合及全部实验命令副作用不在本次验收内。命令结果仍为`dispatched` / `observed:false`，不是动作完成或物理状态回读；运行帧失败会停止桥并使后续调用拒绝，不会撤销此前已派发事件。
 
 ## 充电展示接入契约
 

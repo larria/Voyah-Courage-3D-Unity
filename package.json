@@ -1,0 +1,10 @@
+{
+  "name": "zhiyin-3d-model",
+  "private": true,
+  "scripts": {
+    "publish": "node tools/publish.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

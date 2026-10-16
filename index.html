@@ -1,6 +1,30 @@
 <!doctype html>
-<html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="refresh" content="0;url=./examples/api.html">
-<title>岚图知音 3D API 控制台</title></head>
-<body><a href="./examples/api.html">进入 3D API 控制台</a></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3f2ef"><meta name="description" content="全新岚图知音沉浸式3D展厅。自由探索外观、内饰与原车交互动画。">
+<title>全新岚图知音 · 3D 展厅</title>
+<link rel="stylesheet" href="tools/showroom.css">
+</head>
+<body>
+<main id="showroom" class="showroom">
+<header class="header chrome"><a class="brand" href="./" aria-label="岚图知音首页"><span class="brand-mark">V</span><span>VOYAH <small>岚图汽车</small></span></a><span class="header-caption">DIGITAL SHOWROOM / 数字展厅</span><a class="api-link" href="examples/api.html">API 控制台 ↗</a></header>
+<section class="experience" aria-label="车辆3D展示">
+<div class="stage" id="stage"></div>
+<div class="intro chrome"><span class="eyebrow">MEET YOUR NEXT JOURNEY</span><h1>全新岚图知音</h1><p>每个角度，皆是心动。</p></div>
+<div class="viewer-tools chrome"><button id="immerse" type="button" title="隐藏界面，沉浸观赏">◈ <span>沉浸观赏</span></button><button id="fullscreen" type="button" aria-pressed="false" title="进入全屏">⛶ <span>全屏</span></button></div>
+<button id="restore" class="restore" type="button" hidden>↗ 显示控制界面</button>
+<div class="gesture chrome"><span>↔ 拖动旋转</span><span>⊕ 滚轮 / 双指缩放</span><span class="desktop-hint">点击车身部位探索</span></div>
+<div id="loading" class="loading" role="status" aria-live="polite"><div class="loading-card"><span class="eyebrow">VOYAH · 3D EXPERIENCE</span><div class="loader-orbit" aria-hidden="true"></div><h2 id="loading-title">正在准备您的展厅</h2><p id="loading-copy">首次加载需下载约 46 MB 原始模型资源，请稍候。</p><progress id="progress" max="1" value="0" aria-label="模型加载进度"></progress><div class="load-meta"><span id="load-phase">下载模型资源</span><span id="percent">0%</span></div><button id="retry" type="button" hidden>重新加载</button></div></div>
+</section>
+<aside class="panel chrome" aria-label="车辆配置与体验"><div class="panel-heading"><span class="eyebrow">MAKE IT YOURS</span><h2>探索你的知音</h2><p>原始模型 · 真实动画 · 自由探索</p></div>
+<nav class="tabs" aria-label="体验分类"><button type="button" class="active" data-tab="design" aria-pressed="true">设计</button><button type="button" data-tab="openings" aria-pressed="false">门窗</button><button type="button" data-tab="experience" aria-pressed="false">体验</button></nav>
+<div class="panel-content">
+<section data-section="design"><div class="section-label">外观车漆 <span id="color-name">香槟金</span></div><div id="paints" class="swatches"></div><div class="section-label">内饰配色 <span id="interior-name">旭日红</span></div><div id="interiors" class="swatches"></div><div class="section-label">视角探索</div><div class="segmented"><button data-method="exitInterior">欣赏外观</button><button data-method="enterInterior">进入座舱</button></div><div class="section-label">相机预设</div><div class="segmented"><button data-method="setCameraPreset" data-value="0">视角 01</button><button data-method="setCameraPreset" data-value="1">视角 02</button><button data-method="setCameraPreset" data-value="2">视角 03</button></div><div class="section-label">轮毂造型</div><div class="segmented"><button data-method="setWheelType" data-value="0">造型 01</button><button data-method="setWheelType" data-value="1">造型 02</button></div></section>
+<section data-section="openings" hidden><p class="section-note">独立控制四门四窗，感受原车开合动画。</p><div id="openings"></div><div class="section-label">尾门</div><button class="wide" data-method="toggleTrunk">切换尾门开合 ↗</button></section>
+<section data-section="experience" hidden><div class="section-label">光影之间</div><div id="lights"></div><div class="section-label">车辆状态</div><div id="vehicle"></div><div class="section-label">充电演示</div><div id="charging"></div><div class="segmented actions"><button data-method="flashTurnSignals">闪烁转向灯</button><button data-method="findCar">寻车演示</button></div></section>
+</div><footer class="panel-footer"><span class="status-dot" id="status-dot"></span><span id="status">模型准备中</span><small>控件标记为请求设置，非实时车辆状态</small></footer></aside>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</main>
+<script type="module" src="tools/direct-player.js"></script>
+</body></html>

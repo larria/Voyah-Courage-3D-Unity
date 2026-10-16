@@ -1,6 +1,7 @@
 import { createRuntimeControls } from './runtime-controls.js';
 import { createDoorControls } from './door-controls.js';
 import { createChargingControls } from './charging-controls.js';
+import { createMirrorControls } from './mirror-controls.js';
 const active = { player: null };
 const loaders = new Map();
 let canvasSequence = 0;
@@ -104,7 +105,7 @@ export class CarPlayer extends EventTarget {
       preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
       unavailable: ['setTrunk','setDoorSpeed','setWheelAngle'],
-      buildSpecific: ['setDoor','setWindow','setCharging','setChargingCableVisible'],
+      buildSpecific: ['setDoor','setWindow','setCharging','setChargingCableVisible','setMirrors','setLocked'],
       stateReadback: false, multipleInstances: false,
     };
   }
@@ -140,11 +141,45 @@ export class CarPlayer extends EventTarget {
   // Original setRearview uses 1 for folded, 0 for expanded and also changes lighting.
   setMirrors(expanded) {
     if (typeof expanded !== 'boolean') return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', '状态必须为 boolean'));
-    return this._send('setRearview', expanded ? 0 : 1, 'mirrorsFolded');
+    return this._mirrorCommand('setMirrorsExpanded', expanded, 'setRearview', expanded ? 0 : 1, { mirrorsFolded: !expanded });
   }
   setDaytimeRunningLights(on) { return this._boolean('setDaytimeRunningLight', on, 'daytimeRunningLights'); }
   setPositionLights(on) { return this._boolean('setpositionLampLight', on, 'positionLights'); }
-  setLocked(locked) { return this._boolean('carLockStatus', locked, 'locked'); }
+  // Original carLockStatus: 0 locks/folds, 1 unlocks/expands (with lighting side effects).
+  setLocked(locked) {
+    if (typeof locked !== 'boolean') return Promise.reject(new CarPlayerError('INVALID_ARGUMENT', '状态必须为 boolean'));
+    return this._mirrorCommand('setLocked', locked, 'carLockStatus', locked ? 0 : 1, { locked, mirrorsFolded: locked });
+  }
+  async _getMirrorControls() {
+    this._assertAlive(); await this._ready; this._assertAlive();
+    if (!this._mirrorControlsPromise) {
+      const instance = this._instance;
+      const pending = createMirrorControls(instance, {
+        wasmUrl: new URL('Build/ZY.wasm', this._base).href,
+        dataUrl: new URL('Build/ZY.data', this._base).href,
+        isAlive: () => !this._disposed && this._phase === 'ready' && this._instance === instance,
+      }).then(controls => {
+        if (this._disposed || this._instance !== instance) {
+          controls.destroy(); throw new CarPlayerError('DESTROYED', '组件已销毁');
+        }
+        return controls;
+      }).catch(error => {
+        if (this._mirrorControlsPromise === pending) this._mirrorControlsPromise = null;
+        this._assertAlive();
+        throw error instanceof CarPlayerError ? error : new CarPlayerError('UNSUPPORTED_BUILD', error.message);
+      });
+      this._mirrorControlsPromise = pending;
+    }
+    return this._mirrorControlsPromise;
+  }
+  async _mirrorCommand(operation, argument, method, value, state) {
+    const controls = await this._getMirrorControls(); this._assertAlive();
+    try { controls[operation](argument); }
+    catch (error) { throw new CarPlayerError('MIRROR_CONTROL_FAILED', error.message); }
+    Object.assign(this._requested, state);
+    const result = { id: ++this._sequence, method, value, status: 'dispatched', observed: false };
+    this._emit('command', result); return result;
+  }
   flashTurnSignals() { return this._send('setLightBinker'); }
   findCar() { return this._send('carControlFindCar'); }
   setWheelType(index) {
@@ -238,6 +273,9 @@ export class CarPlayer extends EventTarget {
     this._destroyPromise = (async () => {
       // Do not release the single-instance lock while a late Unity boot is still pending.
       await this._bootPromise;
+      if (this._mirrorControlsPromise) {
+        try { (await this._mirrorControlsPromise).destroy(); } catch { /* Creation already failed closed. */ }
+      }
       if (this._instance) { await this._instance.Quit(); this._instance = null; }
       this.canvas.remove(); this._phase = 'destroyed'; if (active.player === this) active.player = null;
       this._emit('destroyed', this.getState());

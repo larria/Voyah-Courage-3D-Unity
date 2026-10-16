@@ -15,7 +15,10 @@ for(const [code,label] of Object.entries(PAINTS))button(label,'setPaint',code,do
 for(const [code,label] of Object.entries(INTERIORS))button(label,'setInterior',code,document.querySelector('#interior-buttons'));
 button('进入内饰','enterInterior',undefined,document.querySelector('#interior-buttons'));
 button('返回外观','exitInterior',undefined,document.querySelector('#interior-buttons'));
-for(const [name,method] of [['大灯','setHeadlights'],['行驶','setDriving'],['后视镜','setMirrors']]){button(name+'开',''+method,true);button(name+'关',''+method,false);}
+for(const [name,method] of [['大灯','setHeadlights'],['行驶','setDriving']]){button(name+'开',''+method,true);button(name+'关',''+method,false);}
+// 公开方法随镜控制模块集成走修正路径；下方实验命令仍使用原始行为。
+button('后视镜开（展开）','setMirrors',true);
+button('后视镜关（折叠）','setMirrors',false);
 const chargingButtons=document.querySelector('#charging-buttons');
 button('开启充电','setCharging',true,chargingButtons);
 button('停止充电','setCharging',false,chargingButtons);
@@ -35,7 +38,8 @@ for (const id of ['LF','LB','RF','RB']) {
 }
 button('转向灯闪烁','flashTurnSignals');
 button('寻车','findCar');
-for (const [name,method] of [['日行灯','setDaytimeRunningLights'],['位置灯','setPositionLights'],['锁车','setLocked']]) { button(name+'开',method,true); button(name+'关',method,false); }
+for (const [name,method] of [['日行灯','setDaytimeRunningLights'],['位置灯','setPositionLights']]) { button(name+'开',method,true); button(name+'关',method,false); }
+button('锁车','setLocked',true); button('解锁','setLocked',false);
 document.querySelector('#destroy').onclick=async()=>{const mountButton=document.querySelector('#mount'),destroyButton=document.querySelector('#destroy');mountButton.disabled=destroyButton.disabled=true;try{await player.destroy();write('已销毁');document.querySelector('#feedback').textContent='已销毁，可重新挂载';}catch(e){write({error:e.message});}finally{mountButton.disabled=destroyButton.disabled=false;}};
 document.querySelector('#mount').onclick=mount;
 document.querySelector('#state').onclick=()=>write({capabilities:player.getCapabilities(),state:player.getState()});

@@ -32,18 +32,18 @@
     },
     {
       "path": "examples/api.html",
-      "bytes": 8365,
-      "sha256": "afd82b01fde81521f2d57b4b00211bfdf456689f9058625a41469eb54f565014"
+      "bytes": 8532,
+      "sha256": "8c58a6d6f851f3659266063847bc7706eed42387a2ffac08ad91f9b81e86f149"
     },
     {
       "path": "index.html",
-      "bytes": 4727,
-      "sha256": "4bc9887057c20796556a8ec1f80ece21558420bb140c58295b1024c07350b401"
+      "bytes": 4741,
+      "sha256": "109194fb98b87048291352aa3446d1e3fd2251cafba2fbbcd3d35237a2db7019"
     },
     {
       "path": "tools/direct-player.js",
-      "bytes": 9290,
-      "sha256": "e0b8c22153d7a3026223013da2f47efe2ed7fa2da78912cea2cf3b5a5e1fac8e"
+      "bytes": 9424,
+      "sha256": "e3b76587a4ef30f94c0ef1d31084481e469d8e21f1f325bff6c2b75f6ee7d55a"
     },
     {
       "path": "tools/serve.py",
@@ -72,8 +72,8 @@
     },
     {
       "path": "unity-player/index.html",
-      "bytes": 12955,
-      "sha256": "7d819824217de42d8345d7239a9d05b12e9a29b7be150508ec5cf26568b56707"
+      "bytes": 13209,
+      "sha256": "5a7d1bcbe7cff41e9cee051380be493410c66c8075d0352b635fd3d293b437dc"
     },
     {
       "path": "unity-player/src/$.js",
@@ -82,8 +82,44 @@
     },
     {
       "path": "tools/showroom.css",
-      "bytes": 8392,
-      "sha256": "cef556ed12a1d912fefed1bd5ecca39c70a7da93e4d56c489f40846f8f79d406"
+      "bytes": 8927,
+      "sha256": "6dbd536a5fc123c65dd3a3d4c735430857437bc1703d1769b8e9698aac93e66f"
+    },
+    {
+      "path": "version.json",
+      "bytes": 25,
+      "sha256": "de76543832fed28163b6108c2401b41d8052b7db1989fb621a0a4e314b8551e5"
+    },
+    {
+      "path": "sw.js",
+      "bytes": 8147,
+      "sha256": "73777dc73f5f547eefe090c02245e34fa948e371822b41377937b9655fa80050"
+    },
+    {
+      "path": "manifest.webmanifest",
+      "bytes": 546,
+      "sha256": "1bdaecd5342282a75a963fc2218a0119b020c9459b8aded17c93a7844c233040"
+    },
+    {
+      "path": "components/pwa-client.js",
+      "bytes": 5988,
+      "sha256": "7b9bc0db6d651aca9f355693b83d1f8c1240adf1d18038bf70871761d33276a6"
+    },
+    {
+      "path": "icons/icon-192.png",
+      "bytes": 757,
+      "sha256": "b06a1aed2359706885ea3f52f8fb4081dbaefcc0f4c9b205ead3f75bf33fd82d"
+    },
+    {
+      "path": "icons/icon-512.png",
+      "bytes": 2985,
+      "sha256": "e8a8cd03b826e3dfadbefb168ebccb8795372ea4714d96ab86fcf02b03defa62"
+    },
+    {
+      "path": "icons/icon-maskable-512.png",
+      "bytes": 2985,
+      "sha256": "e8a8cd03b826e3dfadbefb168ebccb8795372ea4714d96ab86fcf02b03defa62"
     }
-  ]
+  ],
+  "version": "1.1.0"
 }

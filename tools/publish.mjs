@@ -26,6 +26,22 @@ function exportSite(revision, destination) {
   const manifestBytes = git(['show', `${revision}:offline-manifest.json`]);
   const manifest = JSON.parse(manifestBytes.toString('utf8'));
   if (!Array.isArray(manifest.files)) throw new Error('Invalid manifest files');
+  const packageInfo = JSON.parse(git(['show', `${revision}:package.json`]).toString('utf8'));
+  const versionInfo = JSON.parse(git(['show', `${revision}:version.json`]).toString('utf8'));
+  if (!/^\d+\.\d+\.\d+$/.test(versionInfo.version) || packageInfo.version !== versionInfo.version || manifest.version !== versionInfo.version) {
+    throw new Error('package.json, version.json and offline-manifest.json must have the same semantic version');
+  }
+  const webmanifest = JSON.parse(git(['show', `${revision}:manifest.webmanifest`]).toString('utf8'));
+  if (webmanifest.start_url !== './' || webmanifest.scope !== './' || webmanifest.id !== './' || webmanifest.display !== 'standalone') {
+    throw new Error('PWA manifest must use relative root URLs and standalone display');
+  }
+  const requiredIcons = ['icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png'];
+  for (const name of requiredIcons) {
+    const size = name.includes('192') ? '192x192' : '512x512';
+    if (!webmanifest.icons?.some(icon => icon.src === name && icon.sizes === size && icon.type === 'image/png' && icon.purpose === (name.includes('maskable') ? 'maskable' : 'any'))) {
+      throw new Error(`PWA manifest is missing required icon: ${name}`);
+    }
+  }
   const seen = new Set();
   for (const item of manifest.files) {
     const name = item.path;
@@ -39,12 +55,20 @@ function exportSite(revision, destination) {
     if (content.length !== item.bytes || createHash('sha256').update(content).digest('hex') !== item.sha256) {
       throw new Error(`Manifest mismatch: ${name}`);
     }
+    if (requiredIcons.includes(name)) {
+      const size = name.includes('192') ? 192 : 512;
+      if (content.length < 24 || content.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a' ||
+          content.readUInt32BE(16) !== size || content.readUInt32BE(20) !== size) {
+        throw new Error(`Invalid PWA PNG dimensions: ${name}`);
+      }
+    }
     const target = path.join(destination, name);
     mkdirSync(path.dirname(target), { recursive: true });
     writeFileSync(target, content);
   }
   for (const required of ['index.html', 'examples/api.html', 'components/car-player.js',
-    'components/charging-controls.js', 'components/mirror-controls.js', 'unity-player/Build/ZY.wasm']) {
+    'components/charging-controls.js', 'components/mirror-controls.js', 'unity-player/Build/ZY.wasm',
+    'sw.js', 'components/pwa-client.js', 'version.json', 'manifest.webmanifest', ...requiredIcons]) {
     if (!seen.has(required)) throw new Error(`Manifest is missing required entry files: ${required}`);
   }
   writeFileSync(path.join(destination, 'offline-manifest.json'), manifestBytes);

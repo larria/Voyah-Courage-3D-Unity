@@ -105,6 +105,14 @@ python -m http.server 18744 --directory .publish/preview
 
 访问 `http://127.0.0.1:18744/Voyah-Courage-3D-Unity/` 验证子路径加载及门窗操作。预览可与 `--revision <源码SHA>` 组合，仅读取已提交内容，不要求工作区干净、不访问远端也不推送；失败会清理本次创建的导出目录。工具以 Buffer 读取并校验所有清单资源，保留首页、原始 Build 和原 `offline-manifest.json`，另加入 `.nojekyll` 和 `source-revision.json`。
 
+## PWA、版本与缓存
+
+展示页“沉浸欣赏”同时隐藏控制界面并请求全屏；浏览器不支持时仍可沉浸观赏，恢复按钮与系统退出会恢复界面。
+
+整个站点包含展示页、API页和Unity页的PWA接入，右下角展示当前版本。HTTPS或localhost下支持安装和Service Worker；普通局域网HTTP仍可在线运行，但不支持PWA缓存。首次加载缓存模型后，刷新及仅UI版本更新复用SHA-256相同的data/wasm，不重复传输大资源；缓存被浏览器清理、配额不足或模型内容变化时仍需重新下载。
+
+版本唯一维护于version.json，同步package.json和offline-manifest.json版本，运行文件变化需递增版本并重新计算清单尺寸/hash。不要把清单自身或最终提交SHA放入清单制造自引用。自动检查更新，新版就绪后提示确认刷新，稍后不会中断交互；确认更新会刷新其他已打开的展厅标签。缓存状态仅在完整资源缓存成功后显示离线可用，不把模型ready等同于离线完成。
+
 ## 组件集成
 
 容器必须有明确高度。资源默认相对于组件模块URL解析；更换部署结构时显式设置 `assetBaseUrl`。

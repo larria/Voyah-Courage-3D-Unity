@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>ZG</title>
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#12232e">
   <style>
     * {
       padding: 0;
@@ -197,7 +199,9 @@
         alert(message);
       });
     };
-    document.body.appendChild(script);
+    import('../components/pwa-client.js').then(({ pwaReady }) => pwaReady)
+      .then(() => document.body.appendChild(script))
+      .catch(error => unityShowBanner(error.message, 'error'));
 
    // 统一的处理函数
    function handleDyglVoyah(type, msg) {

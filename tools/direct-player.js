@@ -1,4 +1,5 @@
 import { CarPlayer, PAINTS, INTERIORS } from '../components/car-player.js';
+import { pwaReady } from '../components/pwa-client.js';
 
 const $ = id => document.getElementById(id);
 const root = $('showroom');
@@ -119,24 +120,32 @@ document.querySelectorAll('[data-tab]').forEach(button => button.addEventListene
 }));
 function immersion(on) {
   root.classList.toggle('immersive', on);
+  $('immerse').setAttribute('aria-pressed', String(on));
   $('restore').hidden = !on;
   (on ? $('restore') : $('immerse')).focus();
 }
-$('immerse').addEventListener('click', () => immersion(true));
-$('restore').addEventListener('click', () => immersion(false));
-document.addEventListener('keydown', event => { if (event.key === 'Escape' && root.classList.contains('immersive')) immersion(false); });
-$('fullscreen').addEventListener('click', async () => {
+let immersiveFullscreen = false;
+$('immerse').addEventListener('click', async () => {
+  immersion(true);
   try {
-    if (document.fullscreenElement) await document.exitFullscreen();
-    else if (root.requestFullscreen) await root.requestFullscreen();
-    else notify('当前浏览器不支持全屏，可使用沉浸观赏');
-  } catch { notify('无法进入全屏，可使用沉浸观赏'); }
+    if (root.requestFullscreen) await root.requestFullscreen();
+    else notify('已进入沉浸欣赏，当前浏览器不支持原生全屏');
+  } catch { notify('已进入沉浸欣赏，浏览器未允许原生全屏'); }
+});
+async function restoreView() {
+  immersion(false);
+  if (document.fullscreenElement === root) {
+    try { await document.exitFullscreen(); }
+    catch { notify('请使用浏览器全屏退出操作'); }
+  }
+}
+$('restore').addEventListener('click', restoreView);
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && root.classList.contains('immersive')) restoreView();
 });
 document.addEventListener('fullscreenchange', () => {
-  const active = document.fullscreenElement === root;
-  $('fullscreen').setAttribute('aria-pressed', String(active));
-  $('fullscreen').title = active ? '退出全屏' : '进入全屏';
-  $('fullscreen').querySelector('span').textContent = active ? '退出全屏' : '全屏';
+  if (document.fullscreenElement === root) immersiveFullscreen = true;
+  else if (immersiveFullscreen) { immersiveFullscreen = false; immersion(false); }
 });
 function failed(error) {
   ready = false;
@@ -194,4 +203,5 @@ $('retry').addEventListener('click', async () => {
   } catch (error) { failed(error); }
   finally { restarting = false; $('retry').disabled = false; }
 });
+await pwaReady;
 mount();

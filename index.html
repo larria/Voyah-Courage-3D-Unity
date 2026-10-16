@@ -5,6 +5,7 @@
 <meta name="theme-color" content="#f3f2ef"><meta name="description" content="全新岚图知音沉浸式3D展厅。自由探索外观、内饰与原车交互动画。">
 <title>全新岚图知音 · 3D 展厅</title>
 <link rel="stylesheet" href="tools/showroom.css">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
 <main id="showroom" class="showroom">
@@ -12,7 +13,7 @@
 <section class="experience" aria-label="车辆3D展示">
 <div class="stage" id="stage"></div>
 <div class="intro chrome"><span class="eyebrow">MEET YOUR NEXT JOURNEY</span><h1>全新岚图知音</h1><p>每个角度，皆是心动。</p></div>
-<div class="viewer-tools chrome"><button id="immerse" type="button" title="隐藏界面，沉浸观赏">◈ <span>沉浸观赏</span></button><button id="fullscreen" type="button" aria-pressed="false" title="进入全屏">⛶ <span>全屏</span></button></div>
+<div class="viewer-tools chrome"><button id="immerse" type="button" aria-pressed="false" title="隐藏界面并全屏欣赏">◈ <span>沉浸欣赏</span></button></div>
 <button id="restore" class="restore" type="button" hidden>↗ 显示控制界面</button>
 <div class="gesture chrome"><span>↔ 拖动旋转</span><span>⊕ 滚轮 / 双指缩放</span><span class="desktop-hint">点击车身部位探索</span></div>
 <div id="loading" class="loading" role="status" aria-live="polite"><div class="loading-card"><span class="eyebrow">VOYAH · 3D EXPERIENCE</span><div class="loader-orbit" aria-hidden="true"></div><h2 id="loading-title">正在准备您的展厅</h2><p id="loading-copy">首次加载需下载约 46 MB 原始模型资源，请稍候。</p><progress id="progress" max="1" value="0" aria-label="模型加载进度"></progress><div class="load-meta"><span id="load-phase">下载模型资源</span><span id="percent">0%</span></div><button id="retry" type="button" hidden>重新加载</button></div></div>

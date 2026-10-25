@@ -2,13 +2,13 @@
   "files": [
     {
       "path": "components/car-player.js",
-      "bytes": 17558,
-      "sha256": "4964b9d77d2cf8c7817ca02244abe833df966e9e424305b29e3575b0ad2a29b9"
+      "bytes": 17946,
+      "sha256": "b116cc36e091392a8d3e70a11b74ff1616d3d01657a29ae457b2c84236a0c973"
     },
     {
       "path": "components/charging-controls.js",
-      "bytes": 5901,
-      "sha256": "93983d219098b7842a969cec78844870f50ce46386deb3ea8b257a82bc9fc444"
+      "bytes": 9977,
+      "sha256": "5f30e452b68256b2ae2b644da1da2451506799458d37eb1bc36797d8d7f2143d"
     },
     {
       "path": "components/door-controls.js",
@@ -32,8 +32,8 @@
     },
     {
       "path": "examples/api.html",
-      "bytes": 8532,
-      "sha256": "8c58a6d6f851f3659266063847bc7706eed42387a2ffac08ad91f9b81e86f149"
+      "bytes": 8795,
+      "sha256": "64950cca9971873804c9d580c7e86e6ef9d334b3b6f3ab70c1288a7ab28a84bd"
     },
     {
       "path": "index.html",
@@ -42,8 +42,8 @@
     },
     {
       "path": "tools/direct-player.js",
-      "bytes": 9424,
-      "sha256": "e3b76587a4ef30f94c0ef1d31084481e469d8e21f1f325bff6c2b75f6ee7d55a"
+      "bytes": 9560,
+      "sha256": "1013e8f65b1bb899764f1062202e28b603a2b56956db4d1583e2d10060480181"
     },
     {
       "path": "tools/serve.py",
@@ -88,7 +88,7 @@
     {
       "path": "version.json",
       "bytes": 25,
-      "sha256": "de76543832fed28163b6108c2401b41d8052b7db1989fb621a0a4e314b8551e5"
+      "sha256": "f8d7634340626501905a23745431bd3b801ab2ea9d9dd529da008c39fd48d762"
     },
     {
       "path": "sw.js",
@@ -121,5 +121,5 @@
       "sha256": "e8a8cd03b826e3dfadbefb168ebccb8795372ea4714d96ab86fcf02b03defa62"
     }
   ],
-  "version": "1.1.0"
+  "version": "1.1.1"
 }

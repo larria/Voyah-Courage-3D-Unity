@@ -62,6 +62,7 @@ for (const [label, method] of [['前大灯', 'setHeadlights'], ['日间行车灯
 row('vehicle', '后视镜', 'setMirrors', [['展开', true], ['折叠', false]]);
 row('vehicle', '锁车演示', 'setLocked', [['锁车', true], ['解锁', false]]);
 row('vehicle', '驾驶演示', 'setDriving', [['开始', true], ['停止', false]]);
+row('charging', '充电盖板', 'setChargingPortOpen', [['打开', true], ['关闭', false]]);
 row('charging', '充电流光', 'setCharging', [['开启', true], ['关闭', false]]);
 row('charging', '充电线缆', 'setChargingCableVisible', [['显示', true], ['隐藏', false]]);
 
@@ -69,7 +70,7 @@ function syncSelection() {
   const state = player.getState().requested;
   $('color-name').textContent = PAINTS[state.paint];
   $('interior-name').textContent = INTERIORS[state.interior];
-  const keys = { setPaint: 'paint', setInterior: 'interior', setCameraPreset: 'camera', setWheelType: 'wheelType', setHeadlights: 'headlights', setDaytimeRunningLights: 'daytimeRunningLights', setPositionLights: 'positionLights', setDriving: 'driving', setLocked: 'locked', setCharging: 'charging', setChargingCableVisible: 'chargingCableVisible' };
+  const keys = { setPaint: 'paint', setInterior: 'interior', setCameraPreset: 'camera', setWheelType: 'wheelType', setHeadlights: 'headlights', setDaytimeRunningLights: 'daytimeRunningLights', setPositionLights: 'positionLights', setDriving: 'driving', setLocked: 'locked', setCharging: 'charging', setChargingCableVisible: 'chargingCableVisible', setChargingPortOpen: 'chargingPortOpen' };
   document.querySelectorAll('[data-method]').forEach(button => {
     const method = button.dataset.method;
     const args = argumentsFor(button);

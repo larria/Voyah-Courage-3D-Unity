@@ -105,7 +105,7 @@ export class CarPlayer extends EventTarget {
       preview: ['setMirrors','setCameraPreset','setDaytimeRunningLights','setPositionLights','setLocked','flashTurnSignals','findCar'],
       experimental: Object.keys(RUNTIME_METHODS),
       unavailable: ['setTrunk','setDoorSpeed','setWheelAngle'],
-      buildSpecific: ['setDoor','setWindow','setCharging','setChargingCableVisible','setMirrors','setLocked'],
+      buildSpecific: ['setDoor','setWindow','setCharging','setChargingCableVisible','setChargingPortOpen','setMirrors','setLocked'],
       stateReadback: false, multipleInstances: false,
     };
   }
@@ -199,8 +199,9 @@ export class CarPlayer extends EventTarget {
         dataUrl: new URL('Build/ZY.data', this._base).href,
         isAlive: () => !this._disposed && this._phase === 'ready' && this._instance === instance,
       }).then(controls => {
-        this._assertAlive();
-        if (this._instance !== instance) throw new CarPlayerError('DESTROYED', '运行实例已变化');
+        if (this._disposed || this._instance !== instance) {
+          controls.destroy(); throw new CarPlayerError('DESTROYED', '运行实例已变化');
+        }
         return controls;
       }).catch(error => {
         if (this._chargingControlsPromise === pending) this._chargingControlsPromise = null;
@@ -216,11 +217,12 @@ export class CarPlayer extends EventTarget {
     const controls = await this._getChargingControls(); this._assertAlive();
     try { controls[method](value); }
     catch (error) { throw new CarPlayerError('UNSUPPORTED_BUILD', error.message); }
-    this._requested.charging = method === 'setCharging' && value;
-    this._requested.chargingCableVisible = value;
+    const state = controls.getState();
+    Object.assign(this._requested, { charging: state.charging, chargingCableVisible: state.cableVisible, chargingPortOpen: state.portOpen });
     const result = { id: ++this._sequence, method, value, status: 'dispatched', observed: false };
     this._emit('command', result); return result;
   }
+  setChargingPortOpen(open) { return this._setChargingControl('setChargingPortOpen', open); }
   setCharging(on) { return this._setChargingControl('setCharging', on); }
   setChargingCableVisible(visible) { return this._setChargingControl('setChargingCableVisible', visible); }
   async _getDoorControls() {
@@ -275,6 +277,9 @@ export class CarPlayer extends EventTarget {
       await this._bootPromise;
       if (this._mirrorControlsPromise) {
         try { (await this._mirrorControlsPromise).destroy(); } catch { /* Creation already failed closed. */ }
+      }
+      if (this._chargingControlsPromise) {
+        try { (await this._chargingControlsPromise).destroy(); } catch { /* Failed lazy initialization owns no buffers. */ }
       }
       if (this._instance) { await this._instance.Quit(); this._instance = null; }
       this.canvas.remove(); this._phase = 'destroyed'; if (active.player === this) active.player = null;

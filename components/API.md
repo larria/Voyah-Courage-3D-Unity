@@ -29,7 +29,8 @@ await player.setHeadlights(true);
 API 页提供“进入内饰”和“返回外观”两个按钮，颜色按钮只配色。进出模式可能联动原版场景、相机、灯光或配置；不承诺保留全部其他设置，也不承诺 Promise 表示动画完成。可运行 `python3 verification/interior-mode-check.py` 查看真实 Unity 画面证据。
 - `setHeadlights(boolean)`：原始API.setFrontLight，开关画面变化实测。
 - `setDriving(boolean)`：API.carDrivingStatus，启动/停止画面变化实测；并非真实车辆控制。
-- `setCharging(on)`：严格boolean，true请求充电展示、false请求停止；当前构建专用桥，首次调用按需校验WASM。
+- `setChargingPortOpen(open)`：严格boolean，独立开盖/关盖，有线缆拒绝关盖。
+- `setCharging(on)`：严格boolean，true先开盖请求充电展示、false停流保留线缆和开盖；当前构建专用桥，首次调用按需校验WASM。
 - `setChargingCableVisible(visible)`：严格boolean，true请求显示充电线、false请求隐藏；单独提供控制方法，不改变相机；显示/隐藏线缆会停止充电流动并将充电请求更新为false。
 - `setMirrors(expanded)`：true展开、false折叠；原始值0展开/1折叠，组件已转换。此方法还会影响灯光，非纯镜控制，标为preview。
 - `setDaytimeRunningLights(on)`、`setPositionLights(on)`：已实际观察开关画面变化，preview。
@@ -59,11 +60,13 @@ route1使用原生暂停步进：按当前Build的WASM与data SHA-256、方法�
 ```js
 await player.setCharging(true);
 await player.setChargingCableVisible(true);
-await player.setCharging(false); // 停止充电并隐藏充电线
+await player.setCharging(false); // 停流，保留线缆和开盖
 await player.setChargingCableVisible(false);
 ```
 
-`setCharging(true)` 请求charging=true、chargingCableVisible=true；false则请求两者均为false。`setChargingCableVisible(v)` 请求charging=false、chargingCableVisible=v，显示的是静态线缆。
+`setChargingPortOpen(boolean)` 独立请求盖板开闭。`setCharging(true)` 先开盖再显示线缆、开启流光；false仅停止流光，保留当前线缆和开盖。`setChargingCableVisible(true)` 先开盖再显示静态线缆；false先撤线再关盖，两者均停止流光。有线缆时独立关盖拒绝 `UNSUPPORTED_BUILD`，不派发成功事件。新增 `requested.chargingPortOpen`；所有公开结果仍为 dispatched / observed:false。
+
+盖板是重建的固定姿态：原生 `Transform.localRotation` 设置完整路径 `ZY/ZY-new/ZY/WG/CDK` 父枢轴，闭态四元数约 `[-0.1305262,0,0,0.9914449]`（closedX=−15°），开态为 `qClosed × qLocalY(−60°)`，即相对闭态局部 Y−60°向外开启，不是将绝对欧拉角设为 Y−60°；子 cdk 闭态为 identity。不是已找到 App 原动画，也无平滑动画完成保证。serialized 168/169仅用于资产定位，绝不当运行指针。实际 ±轴、多角内腔、外盖和线缆证据在 `.publish/charging-port-probe/`。桥按 wasm/data 双 SHA、codegen、typed 活对象、唯一完整层级与原生四元数 ABI 校验；独立原生调用不安装镜 hook。destroy/lazy 中销毁释放原生 scratch，失效实例拒绝调用。
 
 参数只接受原生boolean；数字、字符串、null和省略参数均不是开关值，应拒绝 `INVALID_ARGUMENT`。业务应分别维护充电请求和线缆显示请求，优先调用这两个规范方法，不用 `experimental.invoke` 的原始整数参数替代。
 
@@ -75,6 +78,8 @@ await player.setChargingCableVisible(false);
 `player.experimental.invoke(method,value)`：提供元数据确认的32个API方法名的受校验通道（重载仅保留int版本），签名表见`RUNTIME_METHODS`。仅保证参数类型，数值范围、状态含义、副作用可能未验证；初始化/场景命令可改变车色与相机，getState不能回读实验命令产生的实际状态。
 
 覆盖轮毂、版本、选装、灯组、转向闪烁、锁车、寻车、充电线、门把手、座椅、场景和相机等原始API候选。不能宣称全部候选已生效。没有任意对象SendMessage逃生通道，避免把字段误当函数。
+
+候选摘要（交叉核对 `.publish/feature-audit/` 与 `next-step/`）：setCarseat 仅证实 XP_INS_N1_N2/N3 选装资源 active 切换，可选实验，不代表座椅调节或已验收可见配置差异；当前车型门把手数组为空；版本/package 部分字典已确认，但完整配置组合未验收；rearLogo 只有局部可逆像素变化，车标语义及联动时序未确认。Opening 重播、独立 wheelRot 仍未验证。Main.inner 的 mesh 入退出已由规范 enterInterior/exitInterior 覆盖，Charger_LINE/Shape001 已属充电子树，灯组已有原始绑定与公开控制，不重复列作独立遗漏。资产总数 470 包含 122 个场景节点和 348 个资源/预制体节点，不是 470 个 live 独立功能。完整分类见 `docs/model-node-audit.md`。
 
 ## 门窗尾门限制
 尾门已打通`toggleTrunk()`：场景同时有根`/ZY`和`/ZY/ZY-new/ZY`同名网格，裸ZY命中错误对象；绝对路径解决。`setTrunk`仍拒绝，因为无真实回读不能可靠实现幂等。

@@ -2,6 +2,14 @@
 
 本文记录本项目从官网观察、资源定位、原始运行时落地到门窗API封装的实际过程，并说明证据、失败路径与后续维护方法。面向开发人员；部署与业务使用请先阅读README及components/API.md。
 
+## 1.1.1 充电盖重建姿态
+
+先通过原始 Build wasm/data SHA 与 codegen 门禁，从唯一 Main→CarConfigurator→Transform 原生 parent/GetChild 按完整路径解析 `ZY/ZY-new/ZY/WG/CDK`，不使用 serialized pathID 作堆地址。父 CDK 原生闭态四元数约 `[-0.1305262,0,0,0.9914449]`（X−15°），子 cdk 为 identity。getter16601/setter16602、Quaternion 构造15935及活对象、字符串边界/树深度均验证；禁止写堆、修改原 Build 或绕门窗门禁。
+
+`.publish/charging-port-probe/` 保存真实 Chromium canvas ±12°逐轴、±60°进一步对照、父子枢轴和多视角截图、四元数回读。负 Y 方向盖面在车体外可见、内腔与插孔保持固定；正 Y 方向盖片穿入内腔，不采用。父闭态（closedX=−15°）四元数右乘局部 Y−60°，即 `qOpen = qClosed × qLocalY(−60°)` 作为开盖姿态，不是绝对欧拉角 Y−60°，`parent-cable-axis-1--60.png`为真实 UI 显线组合；crop 文件仅实拍像素裁剪放大。此为姿态重建，不冒充已找到 App 原动画。
+
+公开独立 setChargingPortOpen(boolean)，显线/开始流光先开盖，撤线后关；停流留线留盖，有线拒独立关。原生 scratch 在 destroy 与初始化失败释放，无帧 hook，不干扰镜桥。请求与 dispatched/observed:false 仍不代表车辆真实回读。内置浏览器原始 Unity 启动出现 LOAD_FAILED/undefined且截图超时，实际画面验证改用项目已有全局 Playwright Chromium；此环境限制保留，不伪称内置浏览器通过。
+
 ## 内饰模式规范封装
 
 `enterInterior(code?)` 复用原始 `API.interiorTab`；`exitInterior()` 复用 `API.jumpState(1)`。只接受 R/P/Q 原生字符串；省略参数延迟至 ready 后读取 requested.interior，避免初始化旧颜色。`_send` 保留既有单字段调用并最小支持多字段更新，在 command 事件前登记 interior/viewMode；重复命令不去重。setInterior 仍只配色。所有结果只是 dispatched/observed:false，不提供动画完成或真实状态回读。
@@ -48,7 +56,9 @@ ZY.data以UnityWebData1.0容器开头；WASM有标准魔数。静态HTTP服务�
 
 离线验收使用新浏览器context，阻断非本地请求，并实际进行首次门窗调用：门窗桥会再次读取WASM进行hash校验。只看缓存中的首屏不足以证明完整离线。
 
-offline-manifest.json记录所有必要运行文件；它需在运行文件修改后重新生成。开发日志、反汇编工具和历史截图不是页面依赖，可清理或保留精简证据。
+offline-manifest.json记录所有必要运行文件；它需在运行文件修改后显式更新尺寸与 SHA-256。开发日志、反汇编工具和历史截图不是页面依赖，可清理或保留精简证据。
+
+离线证据边界：阻断外网但仍允许本地 HTTP，只证明本次运行不依赖外网；真正断网后加载及首次 lazy 桥调用成功，才证明该次已缓存运行可离线。两者均不能单独证明跨版本大资源下载去重。跨版本去重必须保留更新前后服务端对 wasm/data 的请求次数与响应字节证据，区分网络下载、缓存命中和重新哈希；没有这些计数不得写成“升级不会重复下载”或“跨版本去重已验收”。
 
 ## 4. 为什么没有继续重建渲染参数
 
@@ -244,7 +254,7 @@ Module.asm._g.get(slot)(carPtr, doorId, Number(open), Number(animate), 0);
 
 ### 12.1 充电展示正式接口与维护约束
 
-对外方法统一为 `setCharging(on)` 与 `setChargingCableVisible(visible)`，仅接收严格boolean，不对数字、字符串等做truthy转换；非法输入拒绝 `INVALID_ARGUMENT`。充电展示与充电线显示使用分别提供的规范方法，按钮不隐式调用另一方法，也不自动切换相机；这不代表底层状态互不影响。setCharging(true)请求充电与线缆均为true，false请求两者均为false；setChargingCableVisible(v)请求充电为false、线缆为v，停止流光并展示或隐藏静态线缆。API测试页提供四个独立按钮，并提示从车辆右后侧观察充电口与充电线，避免用前视角无变化判断功能不存在。
+对外方法统一为 `setCharging(on)` 与 `setChargingCableVisible(visible)`，仅接收严格boolean，不对数字、字符串等做truthy转换；非法输入拒绝 `INVALID_ARGUMENT`。充电展示与充电线显示使用分别提供的规范方法，按钮不隐式调用另一方法，也不自动切换相机；这不代表底层状态互不影响。setCharging(true)先开盖并请求充电与线缆均为true，false仅停流、保留当前线缆和开盖；setChargingCableVisible(v)请求充电为false、线缆为v，true先开盖显线，false撤线后关盖。有线缆时独立关盖拒绝；requested.chargingPortOpen 同样只是请求记录。API测试页提供四个独立按钮，并提示从车辆右后侧观察充电口与充电线，避免用前视角无变化判断功能不存在。
 
 请求状态使用 `requested.charging` 与 `requested.chargingCableVisible`，不是内部动画phase或真实车辆遥测；未请求值不冒充已观察到的关闭。规范返回仍是 `dispatched` / `observed:false`，不证明动画结束。失败不得写成成功请求，重复相同请求仍应保持setter语义；业务直接点击模型产生的变化不保证同步回requested。
 
@@ -309,6 +319,14 @@ verification/log-check.py实际驱动加载、内饰三色及门控制，捕获c
 浏览器验证依赖Playwright和Pillow；页面正常运行不需这些库。旧临时反汇编工具和重复截图已清理，精简证据与核心可重跑脚本保留。本文提供已完成的定位信息，但不是从任意Unity版本自动恢复同样桥的通用反编译器。
 
 ## 17. 尚未完成的能力
+
+### 节点盘点与候选简表
+
+完整 typed 清单见 `docs/model-node-audit.md`：470 个资产 GameObject = 122 个 level0 场景节点 + 348 个 resources.assets 资源/预制体节点，不是 470 个运行中独立功能。交叉依据为 `.publish/feature-audit/application-scene-bindings.json`、`application-bodies.json`、`scene-gameobjects.json` 和 `next-step/REPORT.md`；原始引用字节扫描候选不冒充完整 typed 字段解码，序列化 active 也不当作实时状态。
+
+- 已覆盖：Main.inner 的根 mesh 实际随 interiorTab 激活、jumpState(1) 关闭，现有 enterInterior/exitInterior 已封装；Charger_LINE/Shape001 属 SceneCharging 子树；灯组已有原始材质/流程绑定及公开灯光接口，Road 行驶亦已有 setDriving。不是新增漏接功能。
+- 可选实验：XP_INS_N1_N2/N3 已确认 setCarseat/package 切换 active，内外多个观察角度仍无已确认可见差异，不宣称座椅移动；版本/选装字典仅部分确认，完整组合未验收。
+- 未完成：当前车型门把手数组为空；rearLogo 仅局部可逆变化，不足以确认车标语义；Opening 重播、独立 wheelRot、锁/镜/灯完整时序与通用状态回读仍待验收。
 
 门速/轮转角、完整版本与选装值域、通用状态回读仍未公开。部分后视镜/锁车/灯光方法联动其他状态；相机预设仅验证编号而未给业务名称。部分资源相关候选在当前视角无变化，不宣称已生效。
 
